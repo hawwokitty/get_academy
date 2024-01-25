@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introduksjonstekst-oppgave</title>
+</head>
+<body>
+    <div id="fargetBoks">
+      <h4>Om meg!</h4>
+      <p>Hei, jeg heter Hanne, jeg er 26 år gammel og bor i Tønsberg.</p>
+      <h5>Hobbiene mine</h5>
+      <ul> 
+        <li>gaming</li>
+        <li>cosplay</li>
+        <li>sminke</li>
+      </ul>
+      <button onclick="endreFarge()">trykk på meg for å finne ut favoritt fargen min!</button>
+    </div>
+
+    <script>
+      var boks = document.getElementById("fargetBoks");
+
+      function endreFarge() {
+        boks.style.backgroundColor = '#F9629F';
+      }
+    </script>
+</body>
+</html>

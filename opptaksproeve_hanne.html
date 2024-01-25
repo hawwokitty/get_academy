@@ -1,0 +1,58 @@
+<html>
+    <head>
+        <title>Opptaksprøve</title>
+        <style>
+            div {
+                color: white;
+                background-color: purple;
+                padding: 10px;
+                margin: 10px;
+                border: solid deeppink 2px;
+                width: 30px;
+                height: 30px;
+                float: left;
+                text-align: center;
+
+            }
+
+            div.førstPåLinja {
+                clear: left;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="r1k1" onclick="trykk(this, 'r1k2', 'r2k1', 'r1k1', 'r1k1')">3</div>
+        <div id="r1k2" onclick="trykk(this, 'r1k1', 'r2k2', 'r1k3', 'r1k2')">6</div>
+        <div id="r1k3" onclick="trykk(this, 'r1k2', 'r2k3', 'r1k2', 'r1k3')">1</div>
+
+        <div class="førstPåLinja" id="r2k1" onclick="trykk(this, 'r1k1', 'r2k2', 'r3k1', 'r2k1')">2</div>
+        <div id="r2k2" onclick="trykk(this, 'r1k2', 'r2k1', 'r2k3', 'r3k2')"></div>
+        <div id="r2k3" onclick="trykk(this, 'r1k3', 'r2k2', 'r3k3', 'r2k3')">4</div>
+
+        <div class="førstPåLinja" id="r3k1" onclick="trykk(this, 'r2k1', 'r3k2', 'r3k1', 'r3k1')">8</div>
+        <div id="r3k2" onclick="trykk(this, 'r2k2', 'r3k1', 'r3k3', 'r3k2')">7</div>
+        <div id="r3k3" onclick="trykk(this, 'r2k3', 'r3k2', 'r3k3', 'r3k3')">5</div>
+
+        <script>
+            function trykk(tagElement, alt1, alt2, alt3, alt4) {
+                if (document.getElementById(alt1).innerHTML == '') {
+                    document.getElementById(alt1).innerHTML = tagElement.innerHTML;
+                    tagElement.innerHTML = '';
+                }
+                if (document.getElementById(alt2).innerHTML == '') {
+                    document.getElementById(alt2).innerHTML = tagElement.innerHTML;
+                    tagElement.innerHTML = '';
+                }
+                if (document.getElementById(alt3).innerHTML == '') {
+                    document.getElementById(alt3).innerHTML = tagElement.innerHTML;
+                    tagElement.innerHTML = '';
+                }
+                if (document.getElementById(alt4).innerHTML == '') {
+                    document.getElementById(alt4).innerHTML = tagElement.innerHTML;
+                    tagElement.innerHTML = '';
+                }
+            }
+        </script>
+        
+    </body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stoppeklokke</title>
+    <style>
+      .rundeTider {
+
+      }
+    </style>
+</head>
+<body>
+  <div id="sekundViser">0</div>
+  <button onclick="startTimer()">start</button>
+  <button onclick="pauseTimer()">pause</button>
+  <button onclick="stoppTimer()">restart</button>
+  <p>Runde tider:</p>
+  <div class="rundeTider" id="rundeTiderID"></div>
+
+  <script>
+    var sekunder = 0;
+    var nextNumber = document.getElementById("sekundViser");
+    var roundTime = ;
+
+    function startTimer() {
+      setInterval(TellSekunder,1000);
+    }
+
+    function TellSekunder() {
+      sekunder++;
+      nextNumber.innerHTML = sekunder;
+
+    }
+
+    function pauseTimer() {
+      document.getElementById("rundeTiderID").innerHTML = sekunder;
+
+    }
+
+    function stoppTimer() {
+      location.reload();
+    }
+  </script>
+
+</body>
+</html>

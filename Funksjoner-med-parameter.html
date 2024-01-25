@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Funksjoner med parameter</title>
+</head>
+<body>
+  <div id="bytteTing"></div>
+  <button onclick="changeStuff('#F9629F',30,'wee woo')">smol</button>
+  <button onclick="changeStuff('red',400,'RAWR XD')">lorge</button>
+
+  <script>
+    function changeStuff(color,height,text) {
+      document.getElementById('bytteTing').innerHTML = 
+      /*HTML*/`
+      <div style="background-color:${color};height:${height}px">${text}</diV>
+      `;
+    }
+  </script>
+</body>
+</html>

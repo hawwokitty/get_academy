@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oppgave - mer om variabler</title>
+    <style>
+        .colorBox {
+            height: 100px;
+            width: 100px;
+            border: 1px black solid;
+            margin: 5px;
+        }
+
+        .selectedBox {
+            border: 1px red dashed;
+        }
+
+    </style>
+</head>
+<body>
+    <div>
+        <h3>Velg en farge</h3>
+      <div class="colorBox" onclick="pickColor('hotpink')" style="background-color:hotpink;"></div>
+      <div class="colorBox" onclick="pickColor('purple')" style="background-color: purple"></div>
+      <div class="colorBox" onclick="pickColor('aqua')" style="background-color:aqua"></div>
+        <div id="outputColor"></div>
+      <button onclick="endreFarge()">endre bakgrunn</button>
+
+      <div class="colorBox" onclick="changeColor(this)"></div>
+      <div class="colorBox" onclick="changeColor(this)"></div>
+    </div>
+
+    <script>
+      var pickedColor = "";
+      var pickedBox = "";
+      
+
+      function pickColor(color) {
+        pickedColor = color;
+        document.getElementById('outputColor').innerHTML = 'Du har valgt' + ' ' + pickedColor;
+        console.log(pickedColor)
+      }
+
+      function endreFarge() {
+        document.body.style.backgroundColor = pickedColor;
+      }
+
+      function changeColor(selected) {
+        pickedBox = selected;
+        pickedBox.classList.add("selectedBox");
+        pickedBox.style.backgroundColor = pickedColor;
+      }
+
+
+      
+    </script>
+</body>
+</html>
