@@ -5,17 +5,62 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Stoppeklokke</title>
     <style>
-      .rundeTider {
+      .stoppeklokke {
+        height: 300px;
+        width: 300px;
+        background-color: #f36a9c;
+        border-radius: 30%;
+        display: grid;
+        justify-items: center;
+        text-align: center;
+        padding: 20px;
+        border: 5px rgb(139, 0, 127) solid;
       }
+
+      .rundeTider {
+        overflow: scroll;
+        background-color: whitesmoke;
+        height: 100px;
+        width: 120px;
+        border-radius: 10%;
+        font-size: 100%;
+      }
+
+      #sekundViser {
+        background-color: whitesmoke;
+        height: 30px;
+        width: 80px;
+        border-radius: 10%;
+        font-size: 150%;
+      }
+
+      .buttons {
+        display: flex;
+      }
+
+      button {
+        border-radius: 30%;
+        margin: 5px;
+      }
+
+      p {
+        font-size: 150%;
+      }
+
+
     </style>
   </head>
   <body>
-    <div id="sekundViser">0</div>
-    <button onclick="startTimer()">start</button>
-    <button onclick="pauseTimer()">pause</button>
-    <button onclick="stoppTimer()">stopp & fjern</button>
-    <p>Runde tider:</p>
-    <div class="rundeTider" id="rundeTiderID"></div>
+    <div class="stoppeklokke">
+      <div id="sekundViser">0</div>
+      <div class="buttons">
+      <button onclick="startTimer()">start</button>
+      <button onclick="pauseTimer()">pause</button>
+      <button onclick="stoppTimer()">stopp & fjern</button>
+      </div>
+      <p>Runde tider:</p>
+      <div class="rundeTider" id="rundeTiderID"></div>
+    </div>
 
     <script>
       var sekunder = 0;
