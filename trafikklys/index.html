@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trafikklys</title>
+    <style>
+        .trafikklys {
+            height: 410px;
+            width: 150px;
+            background-color: rgb(27, 27, 27);
+            padding: 1px;
+        }
+
+        .inactive {
+            opacity: 10%;
+        }
+
+        #redCircle {
+            background-color: red;
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            margin: 20px;
+        }
+
+        #yellowCircle {
+            background-color: yellow;
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            margin: 20px;
+        }
+
+        #greenCircle {
+            background-color: green;
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            margin: 20px;
+        }
+
+        .activeLight {
+            opacity: 100%;
+        }
+
+        .knapper {
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+  
+    <div class="trafikklys">
+        <div id="redCircle" class="inactive"></div>
+        <div id="yellowCircle" class="inactive"></div>
+        <div id="greenCircle" class="inactive"></div>
+    </div>
+    <div class="knapper">
+        <button onclick="turnOn('redCircle','redCircle','yellowCircle','greenCircle')">rød</button>
+        <button onclick="turnOn('redCircle','yellowCircle','greenCircle','greenCircle')">rød & gul</button>
+        <button onclick="turnOn('yellowCircle','yellowCircle','redCircle','greenCircle')">gul</button>
+        <button onclick="turnOn('greenCircle','greenCircle','redCircle','yellowCircle')">grønn</button>
+    </br>
+    </br>
+        <button onclick="automate()">automatisk</button>
+    </div>
+    
+    <script>
+        const redL = document.getElementById('redCircle');
+        const yellowL = document.getElementById('yellowCircle');
+        const greenL = document.getElementById('greenCircle');
+
+        function turnOn(activeCircle1,activeCircle2,inactiveCircle1,inactiveCircle2) {
+            document.getElementById(activeCircle1).classList.remove('inactive');
+            document.getElementById(activeCircle1).classList.add('activeLight');
+            document.getElementById(activeCircle2).classList.remove('inactive');
+            document.getElementById(activeCircle2).classList.add('activeLight');
+            document.getElementById(inactiveCircle1).classList.add('inactive');
+            document.getElementById(inactiveCircle1).classList.remove('activeLight');
+            document.getElementById(inactiveCircle2).classList.add('inactive');
+            document.getElementById(inactiveCircle2).classList.remove('activeLight');
+
+        }
+
+        function automate() {
+            redL.classList.remove('activeLight');
+            yellowL.classList.remove('activeLight');
+            greenL.classList.remove('activeLight');
+            yellowL.classList.add('inactive');
+            greenL.classList.add('inactive');
+            setTimeout(redLight,2000);
+            setTimeout(yellowRedLight,4000);
+            setTimeout(greenLight,6000);
+            setTimeout(yellowLight,10000);
+            setTimeout(redLight,12000);
+            setInterval(automate,14000)
+        }
+
+        function redLight() {
+            redL.classList.remove('inactive');
+            redL.classList.add('activeLight');
+            yellowL.classList.add('inactive');
+            yellowL.classList.remove('activeLight');
+        }
+        function yellowRedLight() {
+            yellowL.classList.remove('inactive');
+            yellowL.classList.add('activeLight');
+        }
+        function greenLight() {
+            yellowL.classList.add('inactive');
+            yellowL.classList.remove('activeLight');
+            redL.classList.add('inactive');
+            redL.classList.remove('activeLight');
+            greenL.classList.remove('inactive');
+            greenL.classList.add('activeLight');
+        }
+        function yellowLight() {
+            greenL.classList.add('inactive');
+            greenL.classList.remove('activeLight');
+            yellowL.classList.remove('inactive');
+            yellowL.classList.add('activeLight');
+        }
+ 
+    </script>
+</body>
+</html>

@@ -1,0 +1,3 @@
+shift  + alt + pil ned = kopier linje
+ctrl + k + c = kommenter ut linje
+shift + alt + f = auto format

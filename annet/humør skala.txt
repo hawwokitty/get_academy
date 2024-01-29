@@ -1,0 +1,10 @@
+humør skala:
+1: forferdelig, alt gikk til helvete
+2: overlevde så vidt
+3: bad day
+4: kunne vært bedre
+5: kunne vært verre
+6: helt ok
+7: good day
+8: alt er bra
+9: fantastisk!

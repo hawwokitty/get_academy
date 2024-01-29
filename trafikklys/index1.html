@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trafikklys</title>
+    <style>
+        .trafikklys {
+            height: 410px;
+            width: 150px;
+            background-color: rgb(27, 27, 27);
+            padding: 1px;
+        }
+
+        .sirkel {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            background-color: gray;
+            margin: 20px;
+        }
+
+        .knapper {
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="trafikklys">
+        <div id="redCircle" class="sirkel"></div>
+        <div id="yellowCircle" class="sirkel"></div>
+        <div id="greenCircle" class="sirkel"></div>
+    </div>
+    <div class="knapper">
+        <button onclick="turnRed('red')">rød</button>
+        <button onclick="turnRedandYellow('red','yellow')">rød & gul</button>
+        <button onclick="turnYellow('yellow')">gul</button>
+        <button onclick="turnGreen('green')">grønn</button>
+    </br>
+    </br>
+        <button onclick="automate()">automatisk</button>
+    </div>
+    
+    <script>
+
+        var redLight = document.getElementById('redCircle');
+        var yellowLight = document.getElementById('yellowCircle');
+        var greenLight = document.getElementById('greenCircle');
+
+        function turnRed(color) {
+            yellowLight.style.backgroundColor = "";
+            greenLight.style.backgroundColor = "";
+            redLight.style.backgroundColor = color;
+
+        }
+        function turnRedandYellow(color,color2) {
+            redLight.style.backgroundColor = color;
+            yellowLight.style.backgroundColor = color2;
+            greenLight.style.backgroundColor = "";
+
+        }
+        function turnYellow(color) {
+            redLight.style.backgroundColor = "";
+            greenLight.style.backgroundColor = "";
+            yellowLight.style.backgroundColor = color;
+
+        }
+        function turnGreen(color) {
+            yellowLight.style.backgroundColor = "";
+            redLight.style.backgroundColor = "";
+            greenLight.style.backgroundColor = color;
+
+        }
+
+        function automate() {
+            setTimeout(startTimer,2000);
+        }
+
+        function startTimer() {
+            turnRed();
+        }
+    </script>
+</body>
+</html>
