@@ -8,3 +8,14 @@ humør skala:
 7: good day
 8: alt er bra
 9: fantastisk!
+
+samarbeid skala:
+1: alle hater hverandre
+2: vi har massive issues
+3: vi sliter
+4: noen er ufornøyde
+5: vi klarer ikke kommunisere lett
+6: vi kommuniserer greit
+7: alle kommer overens
+8: vi koser oss!
+9: alt går smooth like butter
