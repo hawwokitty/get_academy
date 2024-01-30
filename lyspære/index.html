@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lyspære</title>
+    <style>
+        #lightbulb {
+            height: 200px;
+            width: 200px;
+            border-radius: 50%;
+            border: 1px rgb(208, 208, 208) solid;
+        }
+
+        .lightOn {
+            background-color: rgb(255, 245, 99);
+            opacity: 80%;
+        }
+
+        .lightOff {
+            background-color: rgb(204, 203, 188);
+            opacity: 70%;
+        }
+    </style>
+</head>
+<body>
+    <div class="lightOff" id="lightbulb" onclick="powerLight()"></div>
+
+    <script>
+        let bulb = document.getElementById('lightbulb');
+        
+
+        function powerLight() {
+            if (bulb.classList = 'lightOff') {
+                bulb.classList.add('lightOn');
+                bulb.classList.remove('lightOff');
+            }
+            else {
+                bulb.classList.remove('lightOn');
+                bulb.classList.add('lightOff');
+            }
+        }
+    </script>
+</body>
+</html>
