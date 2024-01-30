@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tastatur</title>
+    <style>
+        #tekstBoks {
+            height: 200px;
+            background-color: rgb(255, 143, 221);
+            overflow: scroll;
+        }
+
+        .tastatur {
+           text-align: center;
+            
+        }
+
+        .tast {
+            margin-top: 5px;
+            font-size: 200%;
+            height: 42px;
+            width: 42px;
+
+        }
+
+    </style>
+</head>
+<body>
+    <div id="tekstBoks"></div>
+    <div class="tastatur">
+    <button id="tastID" class="tast" onclick="pickLetter(this)">Q</button>
+    <button id="tastID" class="tast" onclick="pickLetter(this)">W</button>
+    <button id="tastID" class="tast" onclick="pickLetter(this)">E</button>
+    <button id="tastID" class="tast" onclick="pickLetter(this)">R</button>
+    <button id="tastID" class="tast" onclick="pickLetter(this)">T</button>
+    <button id="tastID" class="tast" onclick="pickLetter(this)">Y</button>
+    <button id="tastID" class="tast" onclick="pickLetter(this)">U</button>
+    <button id="tastID" class="tast" onclick="pickLetter(this)">I</button>
+    <button id="tastID" class="tast" onclick="pickLetter(this)">O</button>
+    <button id="tastID" class="tast" onclick="pickLetter(this)">P</button>
+    <button id="tastID" class="tast" onclick="pickLetter(this)">Å</button>
+        </br>
+    <button id="tastID" class="tast" onclick="pickLetter(this)">A</button>
+    <button id="tastID" class="tast" onclick="pickLetter(this)">S</button>
+    <button id="tastID" class="tast" onclick="pickLetter(this)">D</button>
+    <button id="tastID" class="tast" onclick="pickLetter(this)">F</button>
+    <button id="tastID" class="tast" onclick="pickLetter(this)">G</button>
+    <button id="tastID" class="tast" onclick="pickLetter(this)">H</button>
+    <button id="tastID" class="tast" onclick="pickLetter(this)">J</button>
+    <button id="tastID" class="tast" onclick="pickLetter(this)">K</button>
+    <button id="tastID" class="tast" onclick="pickLetter(this)">L</button>
+    <button id="tastID" class="tast" onclick="pickLetter(this)">Ø</button>
+    <button id="tastID" class="tast" onclick="pickLetter(this)">Æ</button>
+        </br>
+    <button id="tastID" class="tast" onclick="pickLetter(this)">Z</button>
+    <button id="tastID" class="tast" onclick="pickLetter(this)">X</button>
+    <button id="tastID" class="tast" onclick="pickLetter(this)">C</button>
+    <button id="tastID" class="tast" onclick="pickLetter(this)">V</button>
+    <button id="tastID" class="tast" onclick="pickLetter(this)">B</button>
+    <button id="tastID" class="tast" onclick="pickLetter(this)">N</button>
+    <button id="tastID" class="tast" onclick="pickLetter(this)">M</button>
+        </br>
+    <button id="tastID" class="tast" onclick="space()">_</button>
+    </div>
+
+    <script>
+        
+        let tekstOutput = document.getElementById('tekstBoks');
+
+        function pickLetter(letter) {
+            let pickedLetter = letter.innerHTML;
+            console.log(pickedLetter);
+            tekstOutput.innerHTML += pickedLetter;
+        }
+
+        function space() {
+            tekstOutput.innerHTML += ' ';
+        }
+       
+
+
+    </script>
+    
+</body>
+</html>
