@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team oppgave</title>
+    <style>
+        #itemsList {
+            background-image: url(fridge.png);
+            size: 100%;
+            width: 540px;
+            height: 600px;
+        } 
+
+        #one {
+            display: flex;                  /* Same as if statement, toggleInventory function, display type*/
+            flex-direction: column-reverse; 
+            justify-content: center;
+            margin: -15px;
+            z-index: 1;
+        }
+
+        .items:hover {
+        transform: scale(1.2);
+        }
+        .itemslot:hover {
+        transform: scale(1.2);
+        }
+
+        
+        div.inventory {
+        margin: 0;
+        display: flex;                  /* Same as if statement, toggleInventory function, display type*/
+        flex-direction: column; 
+        justify-content: center;
+        align-items: center;
+        background-color: #b4e2ee;
+        padding:10px 0 50px 0;
+        border-radius: 10%;
+        font-style: italic;
+        font-size: 30px;
+        }
+
+        button.toggleButton {
+            width: 180px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .container{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .btns{
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 10px;
+            
+        }
+
+        .fridge {
+            display: grid;
+            grid-template-columns: repeat(8, 1fr);
+            grid-template-rows: repeat(20, 1fr);
+            grid-template-areas: 
+                ". . . . . . . ."
+                ". . . . . . . ."
+                ". . . . . . . ."
+                ". . . . . . . ."
+                ". . . . . . . ."
+                ". . . . . . . ."
+                ". . . . item1 item2 item3 ."
+                ". . . . . . . ."
+                ". . . . item4 . item5  ."
+                ". . . . . . . ."
+                ". . . . . . . ."
+                ". . . . . . . ."
+                ". . . . item6 item7 item8 ."
+                ". . . . . . . ."
+                ". . . . item9 . item10 ."
+                ". . . . . . . ."
+                ".. . . . . . . ."
+                ". . . . . . . .";
+        }
+        #inventory{
+            width: 400px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+    <div class="fridge" id="itemsList">
+        
+        <div style="grid-area: item1;" class="items" onclick="clickItem(this)"><img src="top.png"></div>
+        <div style="grid-area: item2;" class="items" onclick="clickItem(this)"><img src="bottom.png"></div>
+        <div style="grid-area: item3;" class="items" onclick="clickItem(this)"><img src="lettuce.png"></div>
+        <div style="grid-area: item4;" class="items" onclick="clickItem(this)"><img src="pickles.png"></div>
+        <div style="grid-area: item5;" class="items" onclick="clickItem(this)"><img src="tomato.png"></div>
+        <div style="grid-area: item6;" class="items" onclick="clickItem(this)"><img src="ketchup.png"></div>
+        <div style="grid-area: item7;" class="items" onclick="clickItem(this)"><img src="mustard.png"></div>
+        <div style="grid-area: item8;" class="items" onclick="clickItem(this)"><img src="patty.png"></div>
+        <div style="grid-area: item9;" class="items" onclick="clickItem(this)"><img src="onion.png"></div>
+        <div style="grid-area: item10;" class="items" onclick="clickItem(this)"><img src="cheese.png"></div>
+    </div>
+
+    <div class="btns">
+    <button class="toggleButton" onclick="toggleInventory()">
+        Show my pocket burger
+    </button>
+    <button onclick="reset()">Reset</button>
+</div>
+    
+    <div id="inventory" class="inventory">
+        <h2 style="padding-bottom: 20px;">Your burger</h2>
+        <div id="one" ></div>
+    </div>
+</div>
+
+    <script>
+        let inv = document.getElementById("one");
+        toggleInventory();
+
+        function clickItem(item) {
+            const clickedItem = item.innerHTML; /* The item you clicked on is saved as "clickedItem" */
+            console.log(clickedItem);
+            inv.innerHTML +=  /*HTML*/`
+            <div onclick="remove(this)" id="one" class="itemslot">${clickedItem}</div>
+            `;
+        }
+
+        function reset() {
+            inv.innerHTML = '';
+        }
+
+        function remove(thing) {
+            const removeItem = thing.remove();
+        }
+
+        function toggleInventory(){         /* Toggles visibilty of inventory on and off */
+            let x = document.getElementById("inventory");
+            if (x.style.display === "none") /* Checks if display type = none, do this */
+            { x.style.display ="flex";}     /* Sets display to type: 'grid', Replace 'grid' to change display type */
+            else                            /* if display type does not = none, do this*/
+            { x.style.display = "none";}    /* Sets display to 'none', hiding the element */
+        }
+    </script>
+</body>
+</html>
