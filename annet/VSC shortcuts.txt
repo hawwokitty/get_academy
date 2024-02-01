@@ -1,3 +1,4 @@
 shift  + alt + pil ned = kopier linje
-ctrl + k + c = kommenter ut linje
+ctrl + k + c = kommenter ut linje (ctrl + k + u er undo kommentar?)
 shift + alt + f = auto format
+ctrl + alt + f = remove follow i share

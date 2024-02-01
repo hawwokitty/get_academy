@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Krokodillespill</title>
+</head>
+<body>
+    <div id="main">
+        <h3>Poeng: <div id="poeng">0</div></h3>
+        <img src="croc.jpg" style="width: 400px;">
+        <div id="randomNumber1"></div>
+        <div id="input"><input type="text" id="crocTegn" placeholder="<, > eller ="></div>
+        <div id="randomNumber2"></div>
+        <button onclick="submit()">Submit</button>
+        <button onclick="reset()">Reset</button>
+
+    </div>
+
+    <script>
+        let score = document.getElementById("poeng");
+        let rN1 = document.getElementById("randomNumber1");
+        let rN2 = document.getElementById("randomNumber2");
+        
+
+        setNumbers();
+
+        function submit() {
+            let input = document.getElementById("crocTegn").value;
+            console.log(input);
+            sign = input;
+            checkAnswer();
+            setNumbers();
+        }
+
+        function setNumbers() {
+            rN1.innerHTML = rNG();
+            rN2.innerHTML = rNG();
+            number1 = rN1.innerHTML;
+            number2 = rN2.innerHTML;
+        }
+
+        function rNG() {
+            return Math.floor(Math.random() * 10);
+        }
+
+        function reset() {
+            location.reload();
+        }
+
+        function checkAnswer() {
+            if (number1 < number2) {
+                if (sign == '<') {
+                    score.innerHTML++;
+                }
+                else {
+                    score.innerHTML--;
+                }
+            }
+            
+            if (number1 > number2) {
+                if (sign == '>') {
+                    score.innerHTML++;
+                }
+                else {
+                    score.innerHTML--;
+                }
+            }
+            if (number1 == number2) {
+                if (sign == '=') {
+                    score.innerHTML++;
+                }
+                else {
+                    score.innerHTML--;
+                }
+            }
+        }
+    </script>
+</body>
+</html>

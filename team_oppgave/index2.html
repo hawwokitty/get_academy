@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Team oppgave</title>
+    <style>
+      #itemsList {
+        display: flex;
+      }
+
+      .items {
+        height: 100px;
+        width: 100px;
+        font-size: 500%;
+      }
+
+      /* denne  */
+      div.inventory {
+        margin: 0;
+        height: 400;
+        width: 200;
+        display: flex; /* Same as if statement, toggleInventory function, display type*/
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: #c6c6c6;
+      }
+
+      button.toggleButton {
+        width: 180px;
+      }
+
+      .Hidden {
+        display: none;
+      }
+      #inventoryBox {
+        display: flex;
+        flex-direction: column;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="itemsList">
+      <div id="item1" class="items" onclick="clickItem(this)">🌸</div>
+      <div id="item2" class="items" onclick="clickItem(this)">⭐️</div>
+      <div id="item3" class="items" onclick="clickItem(this)">🔥</div>
+      <div id="item4" class="items" onclick="clickItem(this)">🍓</div>
+    </div>
+
+    <button class="toggleButton" onclick="toggleInventory()">INVENTORY</button>
+
+    <div id="inventory" class="inventory">
+      <!--- LEVI SITT ARBEID PLASS -->
+      <h2>Your Inventory</h2>
+      <!-- <ul id="inventorylist"></ul> -->
+      <div id="inventoryBox"><div id="one" class="itemslot"></div></div>
+    </div>
+
+    <script>
+      const itemA = document.getElementById("item1").innerHTML;
+      const itemB = document.getElementById("item2").innerHTML;
+      const itemC = document.getElementById("item3").innerHTML;
+      const itemD = document.getElementById("item4").innerHTML;
+      const inv = document.getElementById("one");
+      let clickedItem = ``;
+
+      function clickItem(item) {
+        // display ikoner
+        clickedItem += `<div>${item.innerHTML}</div>`;
+        item.innerHTML; /* The item you clicked on is saved as "clickedItem" */
+        console.log(clickedItem);
+        inv.innerHTML = `${clickedItem}`;
+      }
+
+      function toggleInventory() {
+        /* Toggles visibilty of inventory on and off */
+        let x = document.getElementById("inventory");
+        if (x.style.display === "none") {
+          /* Checks if display type = none, do this */
+          x.style.display = "flex";
+        } /* Sets display to type: 'grid', Replace 'grid' to change display type */ /* if display type does not = none, do this*/ else {
+          x.style.display = "none";
+        } /* Sets display to 'none', hiding the element */
+      }
+
+      function UpdateIconDisplay() {
+        let list_html = "";
+
+        if (inventory_count[item] > 0) {
+          list_html += "<li> ${item} x${inventory_count[item]}</li>";
+        }
+
+        document.getElementById("inventorylist").innerHTML = list_html;
+      }
+    </script>
+  </body>
+</html>

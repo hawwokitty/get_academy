@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Returverdi</title>
+</head>
+<body>
+    <div id="main"></div>
+    <button onclick="changeStuff('pink', 'Hallo verden', 30, 'white')"> Test 1</button>
+    <button onclick="changeStuff('orange', 'Hei på deg!', 20, 'blue')"> Test 2</button>
+    <button onclick="changeStuff('red', 'GET Academy', 40, 'white')"> Test 3</button>
+
+    <script>
+        function changeStuff(color, text, fontSize, fontColor) {
+            document.getElementById('main').innerHTML = /*HTML*/ `
+                <div ${createStyle(color, fontSize, fontColor)}>${text}</div>
+            `;
+        }
+
+        function createStyle(color, fontSize, fontColor) {
+            return `style="${createBgColor(color)} ${createFontSize(fontSize)} ${createFontColor(fontColor)}"`;
+        }
+
+        function createBgColor(color) {
+            return `background-color: ${color};`;
+        }
+
+        function createFontSize(fontSize) {
+            return `font-size: ${fontSize}px;`;
+        }
+
+        function createFontColor(fontColor) {
+            return `color:${fontColor};`;
+        }
+    </script>
+</body>
+</html>
