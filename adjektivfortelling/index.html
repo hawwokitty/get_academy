@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adjektivfortelling</title>
+</head>
+<body>
+    <div id="app"></div>
+    <script>
+        // Model
+        const setning1 = "Once, there was a ";
+        const setning2 = " cat named 'Bianca', she was very ";
+        const setning3 = ". She was not ";
+        const setning4 = " at all, and everyone loved that about her.";
+
+        // View
+        setFields();
+        function setFields() {
+            const app = document.getElementById('app');
+            app.innerHTML = /*HTML*/ `
+            <div class="sentence" id="story">${setning1}
+                <span id="inputWord1">___</span>${setning2}
+                <span id="inputWord2">___</span>${setning3}
+                <span id="inputWord3">___</span>${setning4}
+            </div>
+            <button id="adjective" onclick="pickWord(this)">sweet</button>
+            <button id="adjective" onclick="pickWord(this)">naughty</button>
+            <button id="adjective" onclick="pickWord(this)">cute</button>
+            `;
+        }
+        let replaceWord1 = document.getElementById("inputWord1");
+        let replaceWord2 = document.getElementById("inputWord2");
+        let replaceWord3 = document.getElementById("inputWord3");
+        
+        // Controller
+        function pickWord(word) {
+            const pickedWord = word.innerHTML;
+            if (replaceWord1.innerHTML == "___") {
+                replaceWord1.innerHTML = pickedWord;
+            }
+            else {
+                if (replaceWord2.innerHTML == "___") {
+                replaceWord2.innerHTML = pickedWord;
+                }
+                else {
+                    if (replaceWord3.innerHTML == "___") {
+                    replaceWord3.innerHTML = pickedWord;
+                }
+                }
+            }
+        }
+    </script>
+    
+</body>
+</html>

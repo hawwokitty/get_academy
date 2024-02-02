@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>String som parameter</title>
+</head>
+<body>
+    <div id="string">what is going on?</div>
+    <div id="result"></div>
+    <!-- <input type="text" id="input"> -->
+    <button onclick="changeToUppercase()">Submit</button>
+
+    <script>
+        let text = document.getElementById("string").innerHTML;
+        let part = text.slice(1);
+        let firstLetter = text.charAt(0);
+        let result = firstLetter.toUpperCase();
+
+
+        function changeToUppercase() {
+          document.getElementById("result").innerHTML =  result + part;
+        }
+    </script>
+</body>
+</html>
