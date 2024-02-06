@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Super Mario</title>
+    <style>
+        #main {
+            background-color: #00A0DC ;
+            display: flex;
+            justify-content: center;
+        }
+
+        .box {
+            width: 20%;
+            height: 20%;
+            margin: 10px;
+            padding: 50px;
+            
+        }
+
+        .char>img {
+            height: 200px;
+            border: 5px sandybrown solid;
+            border-radius: 20%;
+            background-color: white;
+        }
+
+        .btn {
+            margin: 10px;
+        }
+
+        .shroom>img {
+            height: 100px;
+        }
+
+        .healthBar {
+            height: 25px;
+            width: 300px;
+            background-color: red;
+            margin: 10px;
+        }
+
+        .marioHealth {
+            height: 25px;
+            width: 200px;
+            background-color: red;
+        }
+        .luigiHealth {
+            height: 25px;
+            width: 140px;
+            background-color: red;
+        }
+        .peachHealth {
+            height: 25px;
+            width: 100px;
+            background-color: red;
+        }
+        .yoshiHealth {
+            height: 25px;
+            width: 80px;
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="app"></div>
+    
+    <script>
+        setFields();
+        function setFields() {
+            const app = document.getElementById('app');
+            app.innerHTML = /*HTML*/ `
+            
+        <div id="main">
+            <div class="box" id="playerBox">
+                <div class="healthBar" id="charHealth"></div>
+                <div class="char" id="character"><img src="mario.png"></div>
+                <button class="btn" id="attack1" onclick="attack('bowser')">Attack bowser</button>
+                <div id="toad"></div>
+                <button class="btn" id="mario" onclick="pickCharacter('mario')">Mario</button>
+                <button class="btn" id="luigi" onclick="pickCharacter('luigi')">Luigi</button>
+                <button class="btn" id="peach" onclick="pickCharacter('peach')">Peach</button>
+                <button class="btn" id="yoshi" onclick="pickCharacter('yoshi')">Yoshi</button>
+            </div>
+            <div class="box" id="bowserBox">
+                <div class="healthBar" id="bowserHealth">300</div>
+                <div class="char" id="bowser"><img src="bowser.png"></div>
+                <button class="btn" id="attack2" onclick="attack('player')">Attack character</button>
+                <div id="bwsshroom"></div>
+            </div>
+        </div>
+            `;
+        }
+
+        let character = document.getElementById("character");
+        let chpBar = document.getElementById("charHealth");
+        let bhpBar = document.getElementById("bowserHealth");
+        let charHp = 300;
+        let bowserHp = 300;
+        
+
+        attack();
+
+        function pickCharacter(pickedCharacter) {
+            bowserHp = 300;
+            bhpBar.innerHTML = /*HTML*/ `
+                <div style="background-color:greenyellow;width:${bowserHp}px;height:25px;">${bowserHp}</div>
+                `;
+            character.innerHTML = /*HTML*/ `
+            <img src="${pickedCharacter}.png">
+            `;
+            if (pickedCharacter == 'mario') {
+                charHp = 200;
+                chpBar.classList.add("marioHealth");
+                chpBar.classList.remove("peachHealth");
+                chpBar.classList.remove("luigiHealth");
+                chpBar.classList.remove("yoshiHealth");
+            }
+            if (pickedCharacter == 'luigi') {
+                charHp = 140;
+                chpBar.classList.add("luigiHealth");
+                chpBar.classList.remove("peachHealth");
+                chpBar.classList.remove("marioHealth");
+                chpBar.classList.remove("yoshiHealth");
+            }
+            if (pickedCharacter == 'peach') {
+                charHp = 100;
+                chpBar.classList.add("peachHealth");
+                chpBar.classList.remove("marioHealth");
+                chpBar.classList.remove("luigiHealth");
+                chpBar.classList.remove("yoshiHealth");
+            }
+            if (pickedCharacter == 'yoshi') {
+                charHp = 80;
+                chpBar.classList.add("yoshiHealth");
+                chpBar.classList.remove("peachHealth");
+                chpBar.classList.remove("luigiHealth");
+                chpBar.classList.remove("marioHealth");
+            }
+            chpBar.innerHTML = /*HTML*/ `
+            <div style="background-color:greenyellow;width:${charHp}px;height:25px;">${charHp}</div>
+            `;
+        }
+
+        function attack(victim) {
+            if (charHp >= 0) {
+                if (victim == 'player') {
+                loseHp(victim);
+                }
+                chpBar.innerHTML = /*HTML*/ `
+                <div style="background-color:greenyellow;width:${charHp}px;height:25px;">${charHp}</div>
+                `;
+            }
+            if (bowserHp >= 0) {
+                if (victim == 'bowser') {
+                loseHp(victim);
+                }
+                bhpBar.innerHTML = /*HTML*/ `
+                <div style="background-color:greenyellow;width:${bowserHp}px;height:25px;">${bowserHp}</div>
+                `;
+            }
+
+            if (charHp <= 20) {
+                document.getElementById("toad").innerHTML = /*HTML*/ `
+                <div class="shroom" id="toad" onclick="gainHp('player')"><img src="toad.png"></div>
+                `;
+            }
+            if (bowserHp <= 20) {
+                document.getElementById("bwsshroom").innerHTML = /*HTML*/ `
+                <div class="shroom" id="bwsshroom" onclick="gainHp('bowser')"><img src="bwsmush.png"></div>
+                `;
+            }
+
+            if (charHp <= 0) {
+                chpBar.innerHTML = /*HTML*/ `
+                <div style="background-color:red;width:300px;height:25px;">you lost</div>
+                `;
+            }
+            if (bowserHp <= 0) {
+                bhpBar.innerHTML = /*HTML*/ `
+                <div style="background-color:red;width:300px;height:25px;">you won</div>
+                `;
+            }
+        }
+
+        function loseHp(loser) {
+            if (loser == 'bowser') {
+                bowserHp = bowserHp - Math.floor(Math.random() * (15-10) + 10);
+            }
+            if (loser == 'player') {
+                charHp = charHp - Math.floor(Math.random() * (10-4) + 4);
+            }
+        }
+
+        function gainHp(boost) {
+            if (boost == 'player') {
+                charHp = charHp + 10;
+                document.getElementById("toad").innerHTML = /*HTML*/ `
+                <div class="shroom" id="toad" onclick="gainHp('player')"></div>
+                `;
+                attack();
+            }
+            if (boost == 'bowser') {
+                bowserHp = bowserHp + 10;
+                document.getElementById("bwsshroom").innerHTML = /*HTML*/ `
+                <div class="shroom" id="bwsshroom" onclick="gainHp('bowser')"></div>
+                `;
+                attack();
+            }
+            
+        }
+    </script>
+    
+</body>
+</html>
