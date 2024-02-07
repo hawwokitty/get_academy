@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock paper scissor</title>
+</head>
+<body>
+    <div id="app"></div>
+    
+
+    <script>
+        setFields();
+        function setFields() {
+            const app = document.getElementById('app');
+            app.innerHTML = /*HTML*/ `
+            <div id="main">
+                <div id="playerPicks">
+                    <div class="item" onclick="playerPick(this)">🪨</div>
+                    <div class="item" onclick="playerPick(this)">📃</div>
+                    <div class="item" onclick="playerPick(this)">✂️</div>
+                    <p>You picked:</p>
+                    <div id="yourPick"></div>
+                    <button id="execute" onclick="go()">Go</button>
+                </div>
+                    <p>Computer picked:</p>
+                    <div id="computerPicks"></div>
+                    <div id="result"></div>
+                </div>
+            `;
+        }
+        let compItem = 0;
+        let compPick = document.getElementById("computerPicks");
+        let urPick = document.getElementById("yourPick");
+        var pickedItem;
+        let result = document.getElementById("result");
+
+        function playerPick(items) {
+            pickedItem = items.innerHTML;
+            urPick.innerHTML = pickedItem;
+        }
+
+        function randomNr() {
+            return Math.floor(Math.random() * (4-1) + 1);
+        }
+
+        function go() {
+            compItem = randomNr();
+            if (compItem == 1) {
+                compPick.innerHTML = "🪨";
+                if (pickedItem == "🪨") {
+                    result.innerHTML = "you tied!";
+                }
+                if (pickedItem == "📃") {
+                    result.innerHTML = "you won!";
+                }
+                if (pickedItem == "✂️") {
+                    result.innerHTML = "you lost!";
+                }
+            }
+            if (compItem == 2) {
+                compPick.innerHTML = "📃";
+                if (pickedItem == "🪨") {
+                    result.innerHTML = "you lost!";
+                }
+                if (pickedItem == "📃") {
+                    result.innerHTML = "you tied!";
+                }
+                if (pickedItem == "✂️") {
+                    result.innerHTML = "you won!";
+                }
+            }
+            if (compItem == 3) {
+                compPick.innerHTML = "✂️";
+                if (pickedItem == "🪨") {
+                    result.innerHTML = "you won!";
+                }
+                if (pickedItem == "📃") {
+                    result.innerHTML = "you lost!";
+                }
+                if (pickedItem == "✂️") {
+                    result.innerHTML = "you tied!";
+                }
+            }
+        }
+        
+    </script>
+</body>
+</html>
