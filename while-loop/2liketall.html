@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2 like tall</title>
+  </head>
+  <body>
+    <button onclick="checkNumbers()">Kjør program</button>
+    <div id="visTall"></div>
+
+    <script>
+      let rN1;
+      let rN2;
+      let showN = document.getElementById("visTall");
+
+      function checkNumbers() {
+        rN1 = generateRandomNumbers();
+        rN2 = generateRandomNumbers();
+        while (rN1 !== rN2) {
+          console.log(rN1);
+          console.log(rN2);
+          
+          rN1 = generateRandomNumbers();
+          rN2 = generateRandomNumbers();
+        }
+        showN.innerHTML = rN1 + " and " + rN2;
+      }
+
+      function generateRandomNumbers() {
+        return Math.floor(Math.random() * 10);
+      }
+    </script>
+  </body>
+</html>

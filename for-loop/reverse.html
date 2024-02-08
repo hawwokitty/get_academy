@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reverser teksten</title>
+  </head>
+  <body>
+    <input id="input" type="text" />
+    <button onclick="getText()">reverse text</button>
+    <div id="result"></div>
+
+    <script>
+      let result = document.getElementById("result");
+
+      function getText() {
+        let inputText = document.getElementById("input").value;
+        let loopedText = "";
+        for (let i = 0; i <= inputText.length; i++) {
+          loopedText = inputText.charAt(i) + loopedText;
+        }
+        result.innerHTML = loopedText;
+      }
+
+     
+    </script>
+  </body>
+</html>
