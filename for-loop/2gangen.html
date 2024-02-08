@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2 gangen</title>
+</head>
+<body>
+    <button onclick="doMath()">gi meg 2 gangen</button>
+    <div id="result"></div>
+
+    <script>
+        let tall = 2;
+        function doMath() {
+            for (let i = 2; i < 12; i++) {
+                document.getElementById("result").innerHTML += tall + ", ";
+                tall = tall + 2;
+                
+            }
+        }
+    </script>
+</body>
+</html>

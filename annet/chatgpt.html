@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MVC & IF</title>
+</head>
+
+<body>
+    <div id="app"></div>
+
+    <script>
+        const appDiv = document.getElementById('app');
+
+        let messageInput = "";
+        let chatlog = "";
+        const delayInMs = 1001;
+
+
+        show();
+        function show() {
+        appDiv.innerHTML = `
+            <input id="chatbox" type="text" oninput="messageInput = this.value">
+            <button onclick="sendMessage()">Send Message</button>
+            <div>${chatlog}</div>`;
+        }
+
+
+        function sendMessage() {
+            chatlog += `${messageInput}`;
+            show();
+            setTimeout(() => {
+                botReply();
+            }, delayInMs);
+        }
+
+        function botReply() {
+            let messageToLower = messageInput.toLowerCase();
+
+            if (messageToLower == "hei" || messageToLower == "hallo") chatlog += ` <br> heisann!`;
+            if (messageToLower == "går det bra?" || messageToLower == "åssen gårre?") chatlog += ` <br> Det går bare bra med meg, takk som spør! <br> Hvordan går det med deg?`;
+            if (messageToLower == "bra") chatlog += ` <br> Det var godt å høre! <br> Ha en fin dag vidre!`;
+            if (messageToLower == "ikke bra") chatlog += `<br> Huff da.. det var trist. Håper du får det bedre snart! <br> <img src="kitten.gif">`;
+            else chatlog += `<br>...?`;
+            show();
+        }
+    </script>
+</body>
+
+</html>

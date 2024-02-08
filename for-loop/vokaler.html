@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vokaler i en string</title>
+  </head>
+  <body>
+    <div id="setning">Hvor mange vokaler er det i denne setningen?</div>
+    <button onclick="tellVokaler()">Tell antall vokaler i setningen</button>
+    <div id="resultat"></div>
+
+    <script>
+      let checkSentence = document.getElementById("setning").innerHTML;
+      let result = document.getElementById("resultat");
+      let aCounter = 0;
+      let eCounter = 0;
+      let iCounter = 0;
+      let oCounter = 0;
+      let uCounter = 0;
+      let yCounter = 0;
+      let æCounter = 0;
+      let øCounter = 0;
+      let åCounter = 0;
+
+      function tellVokaler() {
+        let loopedLetters = "";
+        for (let i = 0; i <= checkSentence.length; i++) {
+          loopedLetters = checkSentence.charAt(i);
+
+          if (loopedLetters == 'a'){
+              aCounter = aCounter + 1; 
+          }
+          if (loopedLetters == 'e'){
+              eCounter = eCounter + 1; 
+          }
+          if (loopedLetters == 'i'){
+              iCounter = iCounter + 1; 
+          }
+          if (loopedLetters == 'o'){
+              oCounter = oCounter + 1; 
+          }
+          if (loopedLetters == 'u'){
+              uCounter = uCounter + 1; 
+          }
+          if (loopedLetters == 'y'){
+              yCounter = yCounter + 1; 
+          }
+          if (loopedLetters == 'æ'){
+              æCounter = æCounter + 1; 
+          }
+          if (loopedLetters == 'ø'){
+              øCounter = øCounter + 1; 
+          }
+          if (loopedLetters == 'å'){
+              åCounter = åCounter + 1; 
+          }
+          
+        }
+        
+        result.innerHTML = aCounter + eCounter + iCounter + oCounter + uCounter + yCounter + æCounter + øCounter + åCounter;
+      }
+
+
+    </script>
+  </body>
+</html>
