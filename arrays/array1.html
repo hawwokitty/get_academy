@@ -1,23 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>loop idk</title>
-</head>
-<body>
+  </head>
+  <body>
     <div id="app"></div>
 
     <script>
-        const app = document.getElementById("app");
-        view();
-        function view() {
-            app.innerHTML = /*HTML*/ `
+      const app = document.getElementById("app");
+      let content = document.getElementById("contentsOfPocket");
+      const pocketStuff = [
+        "Glitter",
+        "Hamster",
+        "Water bottle",
+        "Plushie",
+        "A little snack",
+      ];
+
+      view();
+      function view() {
+        app.innerHTML = /*HTML*/ `
             <div>Things in my pocket:</div>
             <button onclick="showPocket()">show</button>
+            <div id="contentsOfPocket"></div>
             `;
+      }
+
+      function showPocket() {
+        for (let i = 0; i < pocketStuff.length; i++) {
+          document.getElementById("contentsOfPocket").innerHTML +=
+            pocketStuff[i] + ', ';
         }
+      }
     </script>
-    
-</body>
+  </body>
 </html>

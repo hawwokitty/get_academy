@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Handlevogn</title>
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <script>
+      const app = document.getElementById("app");
+      let itemsToBuy = [
+        "Glitter",
+        "Hamster",
+        "Water bottle",
+        "Plushie",
+        "A little snack",
+      ];
+      // const cart = document.getElementById("cart");
+
+      view();
+      showList();
+      function view() {
+        app.innerHTML = /*HTML*/ `
+            <div>Items you can buy:</div>
+            <div id="listOfItems"></div>
+            <div>Cart:</div>
+            <div id="cart"></div>
+            `;
+      }
+
+      function showList() {
+        for (let i = 0; i < itemsToBuy.length; i++) {
+          document.getElementById("listOfItems").innerHTML +=
+            itemsToBuy[i] +
+            /*HTML*/ `
+            <button onclick="addToCart(itemsToBuy)">Add to cart</button>
+            </br>
+            `;
+        }
+      }
+
+      function addToCart(itemAdded) {
+        console.log(itemAdded);
+      }
+    </script>
+  </body>
+</html>
