@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Magic 8 ball</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script>
+      const app = document.getElementById("app");
+      let randomResponse;
+      const responses = [
+        "It is certain",
+        "Reply hazy, try again",
+        "Dont count on it",
+        "It is decidedly so",
+        "Ask again later",
+        "My reply is no",
+        "Without a doubt",
+        "Better not tell you now",
+        "My sources say no",
+        "Yes definitely",
+        "Cannot predict now",
+        "Outlook not so good",
+        "You may rely on it	",
+        "Concentrate and ask again",
+        "Very doubtful",
+        "As I see it, yes",
+        "Most likely",
+        "Outlook good",
+        "Yes",
+        "Signs point to yes",
+      ];
+
+      view();
+      function view() {
+        app.innerHTML = /*HTML*/ `
+                  <button onclick="getResponse()">Shake 8ball</button>
+                  <div id="magicResponse"></div>
+                  `;
+      }
+
+      function getResponse() {
+        randomResponse = Math.floor(Math.random() * responses.length);
+        for (let i = 0; i < responses.length; i++) {
+          document.getElementById("magicResponse").innerHTML =
+            responses[randomResponse];
+        }
+      }
+
+    </script>
+  </body>
+</html>

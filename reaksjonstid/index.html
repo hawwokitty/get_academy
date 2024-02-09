@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mal</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script>
+      const app = document.getElementById("app");
+      updateView();
+      function updateView() {
+        app.innerHTML = /*HTML*/ `
+        <div class="circles">
+            <div id="circle1" class="circle" onclick="clickCircle()"></div>
+            <div id="circle2" class="circle" onclick="clickCircle()"></div>
+            <div id="circle3" class="circle" onclick="clickCircle()"></div>
+            <div id="circle4" class="circle" onclick="clickCircle()"></div>
+            <div id="circle5" class="circle" onclick="clickCircle()"></div>
+                </br>
+            <div id="circle6" class="circle" onclick="clickCircle()"></div>
+            <div id="circle7" class="circle" onclick="clickCircle()"></div>
+            <div id="circle8" class="circle" onclick="clickCircle()"></div>
+            <div id="circle9" class="circle" onclick="clickCircle()"></div>
+            <div id="circle10" class="circle" onclick="clickCircle()"></div>
+                </br>
+            <div id="circle11" class="circle" onclick="clickCircle()"></div>
+            <div id="circle12" class="circle" onclick="clickCircle()"></div>
+            <div id="circle13" class="circle" onclick="clickCircle()"></div>
+            <div id="circle14" class="circle" onclick="clickCircle()"></div>
+            <div id="circle15" class="circle" onclick="clickCircle()"></div>
+                </br>
+            <div id="circle16" class="circle" onclick="clickCircle()"></div>
+            <div id="circle17" class="circle" onclick="clickCircle()"></div>
+            <div id="circle18" class="circle" onclick="clickCircle()"></div>
+            <div id="circle19" class="circle" onclick="clickCircle()"></div>
+            <div id="circle20" class="circle" onclick="clickCircle()"></div>
+                </br>
+            <div id="circle21" class="circle" onclick="clickCircle()"></div>
+            <div id="circle22" class="circle" onclick="clickCircle()"></div>
+            <div id="circle23" class="circle" onclick="clickCircle()"></div>
+            <div id="circle24" class="circle" onclick="clickCircle()"></div>
+            <div id="circle25" class="circle" onclick="clickCircle()"></div>
+            </div>
+        `;
+      }
+    </script>
+
+    <style>
+      .circles {
+        display: flex;
+        
+      }
+      .circle {
+        background-color: palevioletred;
+        height: 50px;
+        width: 50px;
+        border-radius: 50%;
+      }
+    </style>
+  </body>
+</html>

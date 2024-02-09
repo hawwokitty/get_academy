@@ -17,7 +17,7 @@
         "Plushie",
         "A little snack",
       ];
-      // const cart = document.getElementById("cart");
+      
 
       view();
       showList();
@@ -35,14 +35,17 @@
           document.getElementById("listOfItems").innerHTML +=
             itemsToBuy[i] +
             /*HTML*/ `
-            <button onclick="addToCart(itemsToBuy)">Add to cart</button>
+            <button onclick="addToCart('${itemsToBuy[i]}')">Add to cart</button>
             </br>
             `;
         }
       }
-
+      const cart = document.getElementById("cart");
       function addToCart(itemAdded) {
-        console.log(itemAdded);
+        cart.innerHTML += itemAdded +
+            /*HTML*/ `
+            </br>
+            `;
       }
     </script>
   </body>

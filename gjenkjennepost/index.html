@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gjenkjenn epostadresse</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script>
+      const app = document.getElementById("app");
+      let emailHasAt;
+      let emailHasSpace;
+      let emailHasPeriodAfterAt;
+      let containsAt = "Email contains @";
+      let containsSpace = "Email contains a space";
+      let containsPeriod = "Email contains a period";
+      let missingAt = "Email is missing @";
+
+      view();
+      function view() {
+        app.innerHTML = /*HTML*/ `
+            <input id="input" type="text">
+            <button onclick="getResponse()">sjekk epost</button>
+            <div id="response"></div>
+        `;
+      }
+      
+      function getResponse() {
+        let email = document.getElementById("input").value;
+        let loopedEmail = "";
+        let afterAt = "";
+        let afterAtLoop = "";
+        for (let i = 0; i <= email.length; i++) {
+          loopedEmail = email.charAt(i);
+          if (loopedEmail == '@') {
+            emailHasAt = containsAt;
+            afterAt = email.substring(i);
+            for (let iTwo = 0; iTwo <= afterAt.length; iTwo++) {
+                afterAtLoop = afterAt.charAt(iTwo);
+                if (afterAtLoop == '.') {
+                    emailHasPeriodAfterAt = containsPeriod;
+                }
+            }
+          }
+          if (loopedEmail == ' ') {
+            emailHasSpace = containsSpace;
+          }
+        }
+
+        if (emailHasAt == containsAt && emailHasSpace !== containsSpace && emailHasPeriodAfterAt == containsPeriod) {
+            document.getElementById("response").innerHTML = "This seems like an email, me thinks";
+        }
+        else {
+            document.getElementById("response").innerHTML = "This is surely not an email";
+        }
+        emailHasAt = "";
+        emailHasSpace = "";
+        emailHasPeriodAfterAt = "";
+        
+      }
+    </script>
+  </body>
+</html>
