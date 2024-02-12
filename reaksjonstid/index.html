@@ -8,55 +8,149 @@
   <body>
     <div id="app"></div>
     <script>
+      let sekunder = 0;
+      let timer;
+      let randomCircle;
+      let randomNumber;
+      let rSec;
+
+      const circleArray = [
+        "circle1",
+        "circle2",
+        "circle3",
+        "circle4",
+        "circle5",
+        "circle6",
+        "circle7",
+        "circle8",
+        "circle9",
+        "circle10",
+        "circle11",
+        "circle12",
+        "circle13",
+        "circle14",
+        "circle15",
+        "circle16",
+        "circle17",
+        "circle18",
+        "circle19",
+        "circle20",
+        "circle21",
+        "circle22",
+        "circle23",
+        "circle24",
+        "circle25",
+      ];
       const app = document.getElementById("app");
       updateView();
+
       function updateView() {
+        rNG();
         app.innerHTML = /*HTML*/ `
-        <div class="circles">
-            <div id="circle1" class="circle" onclick="clickCircle()"></div>
-            <div id="circle2" class="circle" onclick="clickCircle()"></div>
-            <div id="circle3" class="circle" onclick="clickCircle()"></div>
-            <div id="circle4" class="circle" onclick="clickCircle()"></div>
-            <div id="circle5" class="circle" onclick="clickCircle()"></div>
-                </br>
-            <div id="circle6" class="circle" onclick="clickCircle()"></div>
-            <div id="circle7" class="circle" onclick="clickCircle()"></div>
-            <div id="circle8" class="circle" onclick="clickCircle()"></div>
-            <div id="circle9" class="circle" onclick="clickCircle()"></div>
-            <div id="circle10" class="circle" onclick="clickCircle()"></div>
-                </br>
-            <div id="circle11" class="circle" onclick="clickCircle()"></div>
-            <div id="circle12" class="circle" onclick="clickCircle()"></div>
-            <div id="circle13" class="circle" onclick="clickCircle()"></div>
-            <div id="circle14" class="circle" onclick="clickCircle()"></div>
-            <div id="circle15" class="circle" onclick="clickCircle()"></div>
-                </br>
-            <div id="circle16" class="circle" onclick="clickCircle()"></div>
-            <div id="circle17" class="circle" onclick="clickCircle()"></div>
-            <div id="circle18" class="circle" onclick="clickCircle()"></div>
-            <div id="circle19" class="circle" onclick="clickCircle()"></div>
-            <div id="circle20" class="circle" onclick="clickCircle()"></div>
-                </br>
-            <div id="circle21" class="circle" onclick="clickCircle()"></div>
-            <div id="circle22" class="circle" onclick="clickCircle()"></div>
-            <div id="circle23" class="circle" onclick="clickCircle()"></div>
-            <div id="circle24" class="circle" onclick="clickCircle()"></div>
-            <div id="circle25" class="circle" onclick="clickCircle()"></div>
-            </div>
+        <button onclick="pickRandomCircle();">start</button>
+        <h1>Reaksjonstid: <span id="reaksjonstid"></span></h1>
+        
         `;
+        for (let i = 0; i <= 24; i++) {
+          if (i <= 3) {
+            app.innerHTML += /*HTML*/ `
+              <div id="${circleArray[i]}" class="circle" onclick="clickCircle(this)"></div>
+            `;
+          }
+          if (i == 4) {
+            app.innerHTML += /*HTML*/ `
+              <div id="${circleArray[i]}" class="circle2" onclick="clickCircle(this)"></div>
+            `;
+          }
+          if (i >= 5 && i <= 8) {
+            app.innerHTML += /*HTML*/ `
+              <div id="${circleArray[i]}" class="circle" onclick="clickCircle(this)"></div>
+            `;
+          }
+          if (i == 9) {
+            app.innerHTML += /*HTML*/ `
+              <div id="${circleArray[i]}" class="circle2" onclick="clickCircle(this)"></div>
+            `;
+          }
+          if (i >= 10 && i <= 13) {
+            app.innerHTML += /*HTML*/ `
+              <div id="${circleArray[i]}" class="circle" onclick="clickCircle(this)"></div>
+            `;
+          }
+          if (i == 14) {
+            app.innerHTML += /*HTML*/ `
+              <div id="${circleArray[i]}" class="circle2" onclick="clickCircle(this)"></div>
+            `;
+          }
+          if (i >= 15 && i <= 18) {
+            app.innerHTML += /*HTML*/ `
+              <div id="${circleArray[i]}" class="circle" onclick="clickCircle(this)"></div>
+            `;
+          }
+          if (i == 19) {
+            app.innerHTML += /*HTML*/ `
+              <div id="${circleArray[i]}" class="circle2" onclick="clickCircle(this)"></div>
+            `;
+          }
+          if (i >= 20 && i <= 24) {
+            app.innerHTML += /*HTML*/ `
+              <div id="${circleArray[i]}" class="circle" onclick="clickCircle(this)"></div>
+            `;
+          }
+        }
+      }
+
+      function pickRandomCircle() {
+        timer = setInterval(TellMilliSekunder, 1);
+      }
+
+      function TellMilliSekunder() {
+        sekunder++;
+        randomCircle = document.getElementById(circleArray[randomNumber]);
+        randomSekunder();
+        if (sekunder >= rSec) {
+          changeCircle();
+          sekunder = 0;
+          rNG();
+        }
+      }
+
+      function randomSekunder() {
+        rSec = Math.floor(Math.random() * (800 - 500) + 500);
+      }
+
+      function rNG() {
+        randomNumber = Math.floor(Math.random() * 24);
+      }
+
+      function changeCircle() {
+        randomCircle.classList.add("activeCircle");
+      }
+
+      function clickCircle(clickedCircle) {
+        clickedCircle.classList.remove("activeCircle");
+        document.getElementById("reaksjonstid").innerHTML = sekunder / 1000;
       }
     </script>
 
     <style>
-      .circles {
-        display: flex;
-        
-      }
       .circle {
         background-color: palevioletred;
         height: 50px;
         width: 50px;
         border-radius: 50%;
+        float: left;
+      }
+      .circle2 {
+        background-color: palevioletred;
+        height: 50px;
+        width: 50px;
+        border-radius: 50%;
+        display: flex;
+      }
+
+      .activeCircle {
+        background-color: rgb(255, 0, 102);
       }
     </style>
   </body>
