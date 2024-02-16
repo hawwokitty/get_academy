@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simon says</title>
+    <style>
+      #bg {
+        background-color: rgb(44, 44, 44);
+        width: 550px;
+        height: 550px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+      }
+
+      #container {
+        margin-top: 20px;
+        display: grid;
+        grid-template-columns: repeat(2, 250px);
+        grid-template-rows: repeat(2, 250px);
+      }
+
+      .colorBox {
+        margin: 20px;
+        opacity: 50%;
+      }
+      .colorBox:hover {
+        opacity: 100%;
+      }
+      .colorBox:active {
+        border: 5px rgb(0, 0, 0) solid;
+      }
+
+      .colorBoxOn {
+        opacity: 100%;
+      }
+
+      #red {
+        background-color: red;
+        border-radius: 100% 0% 0% 0%;
+      }
+      #blue {
+        background-color: blue;
+        border-radius: 0% 100% 0% 0%;
+      }
+      #green {
+        background-color: green;
+        border-radius: 0% 0% 0% 100%;
+      }
+      #yellow {
+        background-color: yellow;
+        border-radius: 0% 0% 100% 0%;
+      }
+
+      #main {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+      }
+      #score {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script>
+      const app = document.getElementById("app");
+
+      updateView();
+      function updateView() {
+        app.innerHTML = /*HTML*/ `
+        <div id="main">
+            <div id="bg">
+                <div id="container">
+                    <div id="red" class="colorBox" onclick="pickBox('red')"></div>
+                    <div id="blue" class="colorBox" onclick="pickBox('blue')"></div>
+                    <div id="green" class="colorBox" onclick="pickBox('green')"></div>
+                    <div id="yellow" class="colorBox" onclick="pickBox('yellow')"></div>
+                </div>
+            </div>
+            <div id="score">
+                <p><button id="start" class="btn" onclick="start()">Start</button></p>
+                <p>Your score is:</p>
+                <p>Highscore:</p>
+                <button id="restart" class="btn" onclick="restart()">Restart</button>
+            </div>
+        </div>
+        `;
+      }
+      const redB = document.getElementById("red");
+      const blueB = document.getElementById("blue");
+      const greenB = document.getElementById("green");
+      const yellowB = document.getElementById("yellow");
+      let randomBox;
+      let randomBoxArray = [];
+      let turn = 0;
+
+      function pickBox(input) {
+        let pickedBox = input;
+        console.log(pickedBox);
+      }
+
+      function start() {
+        startLoop();
+      }
+
+      function startLoop() {
+        startLights();
+        setInterval(startLights, 4000);
+       
+      }
+
+      function startLights() {
+        turn++;
+        randomBox = rNG();
+        randomBoxArray.push(randomBox);
+        console.log("you are on turn " + turn);
+        console.log(randomBoxArray);
+        for (let i = 0; i < turn; i++) {
+          setTimeout(turnOnBox, 1000);
+          setTimeout(turnOffBox, 2000);
+          console.log(randomBox);
+        }
+      }
+
+      function turnOnBox() {
+        for (let i = 0; i <= turn; i++) {
+          if (randomBoxArray[i] == 1) {
+            redB.classList.add("colorBoxOn");
+          }
+          if (randomBoxArray[i] == 2) {
+            blueB.classList.add("colorBoxOn");
+          }
+          if (randomBoxArray[i] == 3) {
+            greenB.classList.add("colorBoxOn");
+          }
+          if (randomBoxArray[i] == 4) {
+            yellowB.classList.add("colorBoxOn");
+          }
+        }
+      }
+      function turnOffBox() {
+        for (let i = 0; i <= turn; i++) {
+          if (randomBoxArray[i] == 1) {
+            redB.classList.remove("colorBoxOn");
+          }
+          if (randomBoxArray[i] == 2) {
+            blueB.classList.remove("colorBoxOn");
+          }
+          if (randomBoxArray[i] == 3) {
+            greenB.classList.remove("colorBoxOn");
+          }
+          if (randomBoxArray[i] == 4) {
+            yellowB.classList.remove("colorBoxOn");
+          }
+        }
+      }
+
+      function rNG() {
+        return Math.ceil(Math.random() * 4);
+      }
+    </script>
+  </body>
+</html>

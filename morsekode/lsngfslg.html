@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Translate Text to Code!</title>
+    <style>
+    .textClass{
+        font-size: 200%;
+    }
+    </style>
+</head>
+<body>
+    
+<div id="output"></div>
+
+    <script>
+        const outputDiv = document.getElementById("output");
+        const alphabetArray = "abcdefghijklmnopqrstuvwxyz æøå";
+        const morseCodeArray =  [ '.-', '-...', '-.-.', '-..', '.', '..-.', '--.', '....',
+    '..', '.---', '-.-', '.-..', '--', '-.', '---', '.--.',
+    '--.-', '.-.', '...', '-', '..-', '...-', '.--', '-..-',
+    '-.--', '--..', ' ', '·−·−', '−−−·', '·−−·−']; //4 siste er space, æ ,ø og å
+        let lettersFromInput = " ";
+        let letterTranslatedToMorse = " ";
+   
+    show();
+function show(){
+    outputDiv.innerHTML = `
+    Skriv inn tekst og gjør om til morse (trykk enter)
+        <input type="text" onchange="translator(this)"> 
+        <div class="textClass">
+       
+        ${lettersFromInput} 
+        <p>${letterTranslatedToMorse}</p>
+        </div>
+    `;
+}
+
+function translator(valueFromInput){
+    lettersFromInput = valueFromInput.value.toUpperCase();
+
+    for(letter of valueFromInput.value){
+        let singleLetterFromInput = letter;
+        let letterIndex = alphabetArray.indexOf(singleLetterFromInput);
+       
+            letterTranslatedToMorse += morseCodeArray[letterIndex] + " "; 
+    }
+    show();
+    letterTranslatedToMorse = " ";
+}
+    </script>
+</body>
+</html>

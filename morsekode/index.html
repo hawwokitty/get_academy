@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Morsecode</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script>
+      const alphabetArray = [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e",
+        "f",
+        "g",
+        "h",
+        "i",
+        "j",
+        "k",
+        "l",
+        "m",
+        "n",
+        "o",
+        "p",
+        "q",
+        "r",
+        "s",
+        "t",
+        "u",
+        "v",
+        "w",
+        "x",
+        "y",
+        "z",
+        " ",
+        "æ",
+        "ø",
+        "å",
+      ];
+      const morseCodeArray = [
+        ".-",
+        "-...",
+        "-.-.",
+        "-..",
+        ".",
+        "..-.",
+        "--.",
+        "....",
+        "..",
+        ".---",
+        "-.-",
+        ".-..",
+        "--",
+        "-.",
+        "---",
+        ".--.",
+        "--.-",
+        ".-.",
+        "...",
+        "-",
+        "..-",
+        "...-",
+        ".--",
+        "-..-",
+        "-.--",
+        "--..",
+        " ",
+        "·−·−",
+        "−−−·",
+        "·−−·−",
+      ];
+      const app = document.getElementById("app");
+      updateView();
+      function updateView() {
+        app.innerHTML = /*HTML*/ `
+            <input type="text" id="input">
+            <button onclick="translateText()">Translate</button>
+        `;
+      }
+
+      function translateText() {
+        let inputText = document.getElementById("input").value;
+        let loopedText = "";
+        let translatedText = "";
+        for (let x of inputText) {
+          translatedText += x;
+          // translatedText += loopedText.replace(alphabetArray[i], morseCodeArray[i]) + "  ";
+        }
+        console.log(translatedText);
+      }
+    </script>
+  </body>
+</html>

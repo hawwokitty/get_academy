@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Tabell</title>
+    <style>
+      table,
+      tr,
+      td,
+      th {
+        border: 1px solid lightgray;
+        border-collapse: collapse;
+      }
+
+      td,
+      th {
+        padding: 4px;
+      }
+
+      th {
+        background-color: darkblue;
+        border: 1px solid darkblue;
+        color: white;
+      }
+
+      tr:nth-child(even) {
+        background: antiquewhite;
+      }
+    </style>
+  </head>
+  <body>
+    Oppgaver
+    <ol>
+      <li>
+        Legg til person. Må kunne angis når man lager ny oppgave og må kunne
+        redigeres
+      </li>
+      <li>
+        Legg til kolonne for frist. Bruk input-tag med type="date". Konvertering
+        til visningsformat: <tt>new Date("2019-02-13").toLocaleDateString()</tt>
+      </li>
+      <li>
+        Lag kolonne for "gjort dato" som fylles ut automatisk når man trykker på
+        checkboxen for at det er gjort.
+      </li>
+    </ol>
+    <table id="tasksTable"></table>
+    <p>
+      <input id="taskDescription" type="text" placeholder="Oppgave" />
+      <input id="taskPerson" type="text" placeholder="Navn på person" />
+      <input id="date" type="date" />
+      <button onclick="addTask()">Legg til oppgave</button>
+    </p>
+    <script>
+      // Model
+
+  
+      let savedDate = "2024-02-06";
+      let ferdigDate = "2024-02-10";
+      let person = "Anna";
+      var tasks = [
+        {
+          description: "Eksempel",
+          isDone: true,
+          person,
+          savedDate,
+          ferdigDate,
+        },
+      ];
+
+      // Controller
+      var taskDescriptionInput = document.getElementById("taskDescription");
+      var taskPersonInput = document.getElementById("taskPerson");
+
+      function addTask() {
+        savedDate = document.getElementById("date").value;
+        person = document.getElementById("taskPerson").value;
+        tasks.push({
+          description: taskDescriptionInput.value,
+          isDone: false,
+          person,
+          savedDate,
+        });
+        taskDescriptionInput.value = "";
+        taskPersonInput.value = "";
+        show();
+      }
+
+      // View
+      var tasksTable = document.getElementById("tasksTable");
+      show();
+
+      function show() {
+        let html = /*HTML*/ `
+                        <tr>
+                            <th>Oppgave</th>
+                            <th>Gjort</th>
+                            <th>Person</th>
+                            <th>Frist</th>
+                            <th>Ferdig</th>
+                            <th></th>
+                        </tr>`;
+        for (let i = 0; i < tasks.length; i++) {
+          html += createHtmlRow(i);
+        }
+        tasksTable.innerHTML = html;
+      }
+
+      function createHtmlRow(i) {
+        const task = tasks[i];
+        const checkedHtml = task.isDone ? 'checked="checked"' : "";
+
+        if (!task.editMode)
+          return /*HTML*/ `<tr>
+                            <td>${task.description}</td>
+                            <td><input onchange="changeIsDone(this, ${i})" type="checkbox" ${checkedHtml} /></td>
+                            <td>${task.person}</td>
+                            <td>${task.savedDate}</td>
+                            <td>${task.ferdigDate ?? ""}</td>
+                            <td>
+                                <button onclick="deleteTask(${i})">Slett</button>
+                                <button onclick="editTask(${i})">Rediger</button>
+                            </td>
+                        </tr>
+                        `;
+        return /*HTML*/ `<tr>
+                            <td><input id="editDescription${i}" type="text" value="${
+          task.description
+        }"/></td>
+                            <td><input onchange="changeIsDone(this, ${i})" type="checkbox" ${checkedHtml} /></td>
+                            <td><input type="text" id="newPerson" value="${
+                              task.person
+                            }"/></td>
+                            <td><input type="date" id="newDate"/></td>
+                            <td>${task.ferdigDate ?? ""}</td>
+                            <td>
+                                <button onclick="updateTask(${i})">Lagre</button>
+                            </td>
+                        </tr>
+                        `;
+      }
+
+      function changeIsDone(checkbox, index) {
+        tasks[index].isDone = checkbox.checked;
+        tasks[index].ferdigDate = new Date().toLocaleString();
+        show();
+      }
+
+      function deleteTask(index) {
+        tasks.splice(index, 1);
+        show();
+      }
+
+      function editTask(index) {
+        tasks[index].editMode = true;
+        show();
+      }
+
+      function updateTask(index) {
+        const id = `editDescription${index}`;
+        const inputTag = document.getElementById(id);
+        const task = tasks[index];
+        task.description = inputTag.value;
+        task.editMode = false;
+        task.savedDate = document.getElementById("newDate").value;
+        show();
+      }
+    </script>
+  </body>
+</html>

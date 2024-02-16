@@ -25,7 +25,7 @@
             <div id="response"></div>
         `;
       }
-      
+
       function getResponse() {
         let email = document.getElementById("input").value;
         let loopedEmail = "";
@@ -33,31 +33,35 @@
         let afterAtLoop = "";
         for (let i = 0; i <= email.length; i++) {
           loopedEmail = email.charAt(i);
-          if (loopedEmail == '@') {
+          if (loopedEmail == "@") {
             emailHasAt = containsAt;
             afterAt = email.substring(i);
             for (let iTwo = 0; iTwo <= afterAt.length; iTwo++) {
-                afterAtLoop = afterAt.charAt(iTwo);
-                if (afterAtLoop == '.') {
-                    emailHasPeriodAfterAt = containsPeriod;
-                }
+              afterAtLoop = afterAt.charAt(iTwo);
+              if (afterAtLoop == ".") {
+                emailHasPeriodAfterAt = containsPeriod;
+              }
             }
           }
-          if (loopedEmail == ' ') {
+          if (loopedEmail == " ") {
             emailHasSpace = containsSpace;
           }
         }
 
-        if (emailHasAt == containsAt && emailHasSpace !== containsSpace && emailHasPeriodAfterAt == containsPeriod) {
-            document.getElementById("response").innerHTML = "This seems like an email, me thinks";
-        }
-        else {
-            document.getElementById("response").innerHTML = "This is surely not an email";
+        if (
+          emailHasAt == containsAt &&
+          emailHasSpace !== containsSpace &&
+          emailHasPeriodAfterAt == containsPeriod
+        ) {
+          document.getElementById("response").innerHTML =
+            "This seems like an email, me thinks";
+        } else {
+          document.getElementById("response").innerHTML =
+            "This is surely not an email";
         }
         emailHasAt = "";
         emailHasSpace = "";
         emailHasPeriodAfterAt = "";
-        
       }
     </script>
   </body>
