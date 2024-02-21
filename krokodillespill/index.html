@@ -7,13 +7,16 @@
 </head>
 <body>
     <div id="main">
-        <h3>Poeng: <div id="poeng">0</div></h3>
-        <img src="croc.jpg" style="width: 400px;">
-        <div id="randomNumber1"></div>
-        <div id="input"><input type="text" id="crocTegn" placeholder="<, > eller ="></div>
-        <div id="randomNumber2"></div>
-        <button onclick="submit()">Submit</button>
-        <button onclick="reset()">Reset</button>
+        <form id="form" onsubmit="return doSubmit()">
+            <h3>Poeng: <div id="poeng">0</div></h3>
+            <img src="croc.jpg" style="width: 400px;">
+            <div id="randomNumber1"></div>
+            <div id="input"><input type="text" id="crocTegn" placeholder="<, > eller ="></div>
+            <div id="randomNumber2"></div>
+            <button type="submit">Submit</button>
+            <!-- <button onclick="doSubmit()">Submit</button> -->
+            <button onclick="reset()">Reset</button>
+        </form>
 
     </div>
 
@@ -21,16 +24,22 @@
         let score = document.getElementById("poeng");
         let rN1 = document.getElementById("randomNumber1");
         let rN2 = document.getElementById("randomNumber2");
-        
+        // document.getElementById("form").addEventListener("submit",function(event){
+        //     submit();
+        //     event.preventDefault();
+        //     console.log("test");
+        //     event.stopPropagation();
+        // });
 
         setNumbers();
 
-        function submit() {
+        function doSubmit() {
             let input = document.getElementById("crocTegn").value;
             console.log(input);
             sign = input;
             checkAnswer();
             setNumbers();
+            return false;
         }
 
         function setNumbers() {

@@ -39,11 +39,10 @@ function show(){
 }
 
 function translator(valueFromInput){
-    lettersFromInput = valueFromInput.value.toUpperCase();
+    lettersFromInput = valueFromInput.value.toLowerCase();
 
-    for(letter of valueFromInput.value){
-        let singleLetterFromInput = letter;
-        let letterIndex = alphabetArray.indexOf(singleLetterFromInput);
+    for(const letter of lettersFromInput){
+        let letterIndex = alphabetArray.indexOf(letter);
        
             letterTranslatedToMorse += morseCodeArray[letterIndex] + " "; 
     }

@@ -76,16 +76,18 @@
         <div id="main">
             <div id="bg">
                 <div id="container">
-                    <div id="red" class="colorBox" onclick="pickBox('red')"></div>
-                    <div id="blue" class="colorBox" onclick="pickBox('blue')"></div>
-                    <div id="green" class="colorBox" onclick="pickBox('green')"></div>
-                    <div id="yellow" class="colorBox" onclick="pickBox('yellow')"></div>
+                    <div id="red" class="colorBox" onclick="pickBox(1)"></div>
+                    <div id="blue" class="colorBox" onclick="pickBox(2)"></div>
+                    <div id="green" class="colorBox" onclick="pickBox(3)"></div>
+                    <div id="yellow" class="colorBox" onclick="pickBox(4)"></div>
                 </div>
             </div>
             <div id="score">
                 <p><button id="start" class="btn" onclick="start()">Start</button></p>
                 <p>Your score is:</p>
+                <div id="myScore"></div>
                 <p>Highscore:</p>
+                <div id="myHighScore"></div>
                 <button id="restart" class="btn" onclick="restart()">Restart</button>
             </div>
         </div>
@@ -95,23 +97,36 @@
       const blueB = document.getElementById("blue");
       const greenB = document.getElementById("green");
       const yellowB = document.getElementById("yellow");
+      let myScore = document.getElementById("myScore");
+      let myHighScore = document.getElementById("myHighScore");
+      let score = 0;
+      let scoreArray = [];
+      let highScore;
       let randomBox;
       let randomBoxArray = [];
+      let clickedBoxArray = [];
       let turn = 0;
-
-      function pickBox(input) {
-        let pickedBox = input;
-        console.log(pickedBox);
-      }
+      let interval;
+      
 
       function start() {
         startLoop();
       }
 
+      function restart() {
+        turn = 0;
+        score = 0;
+        randomBoxArray = [];
+        clickedBoxArray = [];
+        startLoop();
+      }
+
       function startLoop() {
         startLights();
-        setInterval(startLights, 4000);
-       
+        // setInterval(() => startLights(), 3000);
+        // interval = setInterval(function () {
+        //   startLights();
+        // }, 3000);
       }
 
       function startLights() {
@@ -121,47 +136,89 @@
         console.log("you are on turn " + turn);
         console.log(randomBoxArray);
         for (let i = 0; i < turn; i++) {
-          setTimeout(turnOnBox, 1000);
-          setTimeout(turnOffBox, 2000);
-          console.log(randomBox);
+          if (i == turn - 1) {
+            turnOnBox(randomBoxArray[i]);
+            setTimeout(function () {
+              turnOffBox(randomBoxArray[i]);
+            }, 1000);
+            console.log("i is " + i);
+            console.log("randomBoxArray[i] is " + randomBoxArray[i]);
+          }
         }
       }
 
-      function turnOnBox() {
-        for (let i = 0; i <= turn; i++) {
-          if (randomBoxArray[i] == 1) {
-            redB.classList.add("colorBoxOn");
-          }
-          if (randomBoxArray[i] == 2) {
-            blueB.classList.add("colorBoxOn");
-          }
-          if (randomBoxArray[i] == 3) {
-            greenB.classList.add("colorBoxOn");
-          }
-          if (randomBoxArray[i] == 4) {
-            yellowB.classList.add("colorBoxOn");
-          }
+      function turnOnBox(box) {
+        if (box == 1) {
+          redB.classList.add("colorBoxOn");
+        } else if (box == 2) {
+          blueB.classList.add("colorBoxOn");
+        } else if (box == 3) {
+          greenB.classList.add("colorBoxOn");
+        } else if (box == 4) {
+          yellowB.classList.add("colorBoxOn");
         }
       }
-      function turnOffBox() {
-        for (let i = 0; i <= turn; i++) {
-          if (randomBoxArray[i] == 1) {
-            redB.classList.remove("colorBoxOn");
-          }
-          if (randomBoxArray[i] == 2) {
-            blueB.classList.remove("colorBoxOn");
-          }
-          if (randomBoxArray[i] == 3) {
-            greenB.classList.remove("colorBoxOn");
-          }
-          if (randomBoxArray[i] == 4) {
-            yellowB.classList.remove("colorBoxOn");
-          }
+      function turnOffBox(box) {
+        if (box == 1) {
+          redB.classList.remove("colorBoxOn");
+        } else if (box == 2) {
+          blueB.classList.remove("colorBoxOn");
+        } else if (box == 3) {
+          greenB.classList.remove("colorBoxOn");
+        } else if (box == 4) {
+          yellowB.classList.remove("colorBoxOn");
         }
       }
+
+      // function turnOffBoxes() {
+      //   redB.classList.remove("colorBoxOn");
+      //   blueB.classList.remove("colorBoxOn");
+      //   greenB.classList.remove("colorBoxOn");
+      //   yellowB.classList.remove("colorBoxOn");
+      // }
 
       function rNG() {
         return Math.ceil(Math.random() * 4);
+      }
+      function pickBox(input) {
+        clearInterval(interval);
+        clickedBoxArray.push(input);
+        console.log(clickedBoxArray);
+        redB.classList.remove("colorBoxOn");
+        blueB.classList.remove("colorBoxOn");
+        greenB.classList.remove("colorBoxOn");
+        yellowB.classList.remove("colorBoxOn");
+        checkArrayTurn();
+      }
+
+      function checkArrayTurn() {
+        if (clickedBoxArray.length == turn) {
+          checkClickedArray();
+          clickedBoxArray = [];
+        } 
+        
+      }
+
+      function checkClickedArray() {
+        if (randomBoxArray.toString() == clickedBoxArray.toString()) {
+          score = Number(score) + 1;
+          myScore.innerHTML = score;
+          scoreArray.push(score);
+          console.log(scoreArray);
+          setTimeout(function () {
+            startLights();
+            }, 1000);
+        }
+        else {
+          myScore.innerHTML = 0;
+        }
+        setHighScore()
+      }
+
+      function setHighScore() {
+        highScore = Math.max(...scoreArray);
+        myHighScore.innerHTML = highScore;
+        console.log("the highscore is " + highScore);
       }
     </script>
   </body>
