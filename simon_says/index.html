@@ -23,7 +23,7 @@
 
       .colorBox {
         margin: 20px;
-        opacity: 50%;
+        opacity: 40%;
       }
       .colorBox:hover {
         opacity: 100%;
@@ -107,7 +107,6 @@
       let clickedBoxArray = [];
       let turn = 0;
       let interval;
-      
 
       function start() {
         startLoop();
@@ -119,6 +118,7 @@
         randomBoxArray = [];
         clickedBoxArray = [];
         startLoop();
+        myScore.innerHTML = "0";
       }
 
       function startLoop() {
@@ -134,16 +134,18 @@
         randomBox = rNG();
         randomBoxArray.push(randomBox);
         console.log("you are on turn " + turn);
-        console.log(randomBoxArray);
+        // console.log("randomBoxArray is " + randomBoxArray);
         for (let i = 0; i < turn; i++) {
-          if (i == turn - 1) {
+          setTimeout(function () {
             turnOnBox(randomBoxArray[i]);
-            setTimeout(function () {
-              turnOffBox(randomBoxArray[i]);
-            }, 1000);
-            console.log("i is " + i);
-            console.log("randomBoxArray[i] is " + randomBoxArray[i]);
-          }
+          }, ((2000 * (i + 1))/2));
+          console.log("it turns on after " + ((2000 * (i + 1))/2));
+          setTimeout(function () {
+            turnOffBox(randomBoxArray[i]);
+          }, (((4000 * (i + 1)) / 2 + 1000)/2)); //i dont know either
+          console.log("it turns off after " + (((4000 * (i + 1)) / 2 + 1000)/2));
+          console.log("i is " + i);
+          console.log("randomBoxArray[i] is " + randomBoxArray[i]);
         }
       }
 
@@ -183,7 +185,7 @@
       function pickBox(input) {
         clearInterval(interval);
         clickedBoxArray.push(input);
-        console.log(clickedBoxArray);
+        // console.log(clickedBoxArray);
         redB.classList.remove("colorBoxOn");
         blueB.classList.remove("colorBoxOn");
         greenB.classList.remove("colorBoxOn");
@@ -195,8 +197,7 @@
         if (clickedBoxArray.length == turn) {
           checkClickedArray();
           clickedBoxArray = [];
-        } 
-        
+        }
       }
 
       function checkClickedArray() {
@@ -204,15 +205,14 @@
           score = Number(score) + 1;
           myScore.innerHTML = score;
           scoreArray.push(score);
-          console.log(scoreArray);
+          // console.log(scoreArray);
           setTimeout(function () {
             startLights();
-            }, 1000);
-        }
-        else {
+          }, 1000);
+        } else {
           myScore.innerHTML = 0;
         }
-        setHighScore()
+        setHighScore();
       }
 
       function setHighScore() {
