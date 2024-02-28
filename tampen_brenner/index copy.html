@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tampen brenner</title>
+    <style>
+      #indicatorId {
+        height: 100px;
+        width: 100px;
+        border: 1px solid black;
+        
+      }
+
+      .red {
+        background-color: rgb(255, 0, 0);
+      }
+
+      .yellow {
+        background-color: rgb(255, 255, 0);
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script>
+      const app = document.getElementById("app");
+      let spotX;
+      let spotY;
+      updateView();
+      pickSpot();
+      function updateView() {
+        app.innerHTML = /*HTML*/ `
+        <div id="spot" onmouseover="warmer()" onmouseout="colder()" style="margin-top:${spotY}px;margin-left:${spotX}px;z-index:2;position:absolute;">here</div>
+        <div>Spill tampen brenner!</div>
+        <div>Bruk musepekeren og let i vinduet etter det hemmelige punktet!</div>
+        <div>Denne indikerer om du er nærme:</div>
+        <div class="yellow" id="indicatorId"></div>
+        `;
+      }
+
+      let spotElement = document.getElementById("indicatorId");
+
+      function pickSpot() {
+        spotX = Math.floor(Math.random() * window.innerWidth);
+        spotY = Math.floor(Math.random() * window.innerHeight);
+        updateView();
+      }
+
+      function warmer() {
+        spotElement.classList.remove("yellow");
+        spotElement.classList.add("red");
+        console.log("warmer");
+      }
+      function colder() {
+        spotElement.classList.remove("red");
+        spotElement.classList.add("yellow");
+        console.log("colder");
+      }
+    </script>
+  </body>
+</html>

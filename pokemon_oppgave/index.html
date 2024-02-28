@@ -12,64 +12,210 @@
       let pikachu = {
         name: "Pikachu",
         health: 45,
-        image: "pikachu.png",
+        image: "images/pikachu.png",
         level: 8,
       };
-
       let bulbasaur = {
         name: "Bulbasaur",
         health: 70,
-        image: "bulbasaur.png",
+        image: "images/bulbasaur.png",
         level: 12,
       };
-
       let oranguru = {
         name: "Oranguru",
         health: 170,
-        image: "oranguru.png",
+        image: "images/oranguru.png",
         level: 45,
       };
-
       let drowzee = {
         name: "Drowzee",
         health: 90,
-        image: "drowzee.png",
+        image: "images/drowzee.png",
         level: 33,
       };
-
-      let possiblePokemon = [pikachu, bulbasaur, oranguru, drowzee];
-      let randomPokemon;
-
-      let player = {
-        name: "Bjarne",
-        image: "pokemonTrainerIdle.png",
-        pokemon: [],
+      let celebi = {
+        name: "Celebi",
+        health: 80,
+        image: "images/celebi.png",
+        level: 20,
+      };
+      let charizard = {
+        name: "Charizard",
+        health: 280,
+        image: "images/charizard.png",
+        level: 32,
+      };
+      let charmander = {
+        name: "Charmander",
+        health: 30,
+        image: "images/charmander.png",
+        level: 10,
+      };
+      let eevee = {
+        name: "Eevee",
+        health: 40,
+        image: "images/eevee.png",
+        level: 13,
+      };
+      let meowth = {
+        name: "Meowth",
+        health: 50,
+        image: "images/meowth.png",
+        level: 15,
+      };
+      let mew = {
+        name: "Mew",
+        health: 230,
+        image: "images/mew.png",
+        level: 26,
+      };
+      let mew2 = {
+        name: "Mew2",
+        health: 270,
+        image: "images/mew2.png",
+        level: 36,
+      };
+      let porygon = {
+        name: "Porygon",
+        health: 69,
+        image: "images/porygon.png",
+        level: 4,
+      };
+      let squirtle = {
+        name: "Squirtle",
+        health: 70,
+        image: "images/squirtle.png",
+        level: 34,
+      };
+      let vaporeon = {
+        name: "Vaporeon",
+        health: 50,
+        image: "images/vaporeon.png",
+        level: 6,
       };
 
+      let possiblePokemon = [
+        pikachu,
+        bulbasaur,
+        oranguru,
+        drowzee,
+        celebi,
+        charizard,
+        charmander,
+        eevee,
+        meowth,
+        mew,
+        mew2,
+        porygon,
+        squirtle,
+        vaporeon,
+      ];
+      let randomPokemon;
+
+      let dawn = {
+        name: "Dawn",
+        image: "images/dawn_trainer.png",
+        pokemon: [bulbasaur, oranguru, charizard, meowth],
+      };
+      let leaf = {
+        name: "Leaf",
+        image: "images/leaf_trainer.png",
+        pokemon: [porygon, squirtle, vaporeon, drowzee, celebi],
+      };
+      let lucas = {
+        name: "Lucas",
+        image: "images/lucas_trainer.png",
+        pokemon: [mew2, squirtle, pikachu, bulbasaur, eevee],
+      };
+      let sg = {
+        name: "Bodin",
+        image: "images/someguy_trainer.png",
+        pokemon: [drowzee, celebi, charizard, charmander, squirtle],
+      };
+      let player = {
+        image: "images/pokemonTrainerIdle.png",
+        pokemon: [],
+      };
+      let possibleTrainers = [dawn, leaf, lucas, sg];
       let app = document.getElementById("app");
+      let playerName;
+      let playerTrainer;
 
       updateView();
 
       function updateView() {
+        app.innerHTML = /*HTML*/ `
+    <div class="container">
+      <form onsubmit="getName()">
+        <div>Pick a trainer:
+          <img id="dawn_trainer" class="trainers" onclick="pickTrainer('dawn_trainer')" src="${dawn.image}">
+          <img id="someguy_trainer" class="trainers" onclick="pickTrainer('someguy_trainer')" src="${sg.image}">
+          <img id="leaf_trainer" class="trainers" onclick="pickTrainer('leaf_trainer')" src="${leaf.image}">
+          <img id="lucas_trainer" class="trainers" onclick="pickTrainer('lucas_trainer')" src="${lucas.image}">
+          </div>
+          <div>Whats your name? <input id="playerGivenName" type="text"></div>
+          <button onclick="getName()">Submit</button>
+      </form>
+    </div>
+    `;
+      }
+      function pickTrainer(pickedTrainer) {
+        document
+          .getElementById("lucas_trainer")
+          .classList.remove("clickedTrainer");
+        document
+          .getElementById("leaf_trainer")
+          .classList.remove("clickedTrainer");
+        document
+          .getElementById("someguy_trainer")
+          .classList.remove("clickedTrainer");
+        document
+          .getElementById("dawn_trainer")
+          .classList.remove("clickedTrainer");
+        document.getElementById(pickedTrainer).classList.add("clickedTrainer");
+        playerTrainer = /*HTML*/ `<img src="images/${pickedTrainer}.png">`;
+      }
+
+      function getName() {
+        playerName = document.getElementById("playerGivenName").value;
+        if (playerName === "") {
+          playerName = "Player";
+        }
+        if (playerTrainer === undefined) {
+          playerTrainer = /*HTML*/ `<img src="images/dawn_trainer.png">`;
+        }
+
+        app.innerHTML = /*HTML*/ `
+    <div class="container">
+      <button onclick="catchPokemonView()">Go in the grass to find pokemon</button>
+      <button onclick="fightTrainer()">Fight another trainer</button>
+      
+    </div>
+    `;
+      }
+
+      function catchPokemonView() {
         getRandomPokemon();
         app.innerHTML = /*HTML*/ `
     <div class="container">
       <div class="opposingPokemon">
           <div>${randomPokemon.name}</div>
           <div>lvl: ${randomPokemon.level}</div>
+          <div>health: ${randomPokemon.health}</div>
           <img src="${randomPokemon.image}">
       </div>
       
       <div class="bottomScreen">
           <div class="player">
-              <img src="${player.image}">
-              <div>${player.name}</div>
+              ${playerTrainer}
+              <div>${playerName}</div>
           </div>
   
           <div class="buttonContainer">
-              <button onclick="catchPokemon()">Fang</button>    
-              <button onclick="updateView()">Finn en annen</button>
-              <button onclick="showPokemon()">Vis dine pokemon</button>       
+              <button onclick="catchPokemon()">Catch</button>    
+              <button onclick="catchPokemonView()">Catch another</button>
+              <button onclick="fightTrainer()">Fight a trainer</button>
+              <button onclick="showPokemon()">Show your pokemon</button>       
           </div>
   
       </div>
@@ -80,10 +226,11 @@
       function caughtPokemonView() {
         app.innerHTML = /*HTML*/ `
     <div class="caughtContainer">
-      <h1>Du fanget ${player.pokemon[player.pokemon.length - 1].name}</h1>
+      <h1>You caught ${player.pokemon[player.pokemon.length - 1].name}</h1>
       <div class="buttonContainer">
-                <button onclick="updateView()">Finn en annen</button>
-                <button onclick="showPokemon()">Vis dine pokemon</button>       
+                <button onclick="catchPokemonView()">Catch another</button>
+                <button onclick="fightTrainer()">Fight a trainer</button>
+                <button onclick="showPokemon()">Show your pokemon</button>       
             </div>
     </div>
     `;
@@ -97,25 +244,74 @@
       function showPokemon() {
         app.innerHTML = /*HTML*/ `
         <div class="caughtContainer">
-        <h1>Du fanget disse pokemonene: </h1>
+        <h1>You have caught these pokemon: </h1>
         <div id="fangetPokemon"></div>
         <div class="buttonContainer">
-            <button onclick="updateView()">Finn en annen</button>      
+            <button onclick="catchPokemonView()">Catch another</button>      
         </div>
     </div>
     `;
 
         for (let i = 0; i <= player.pokemon.length; i++) {
           document.getElementById("fangetPokemon").innerHTML += /*HTML*/ `
-          <img src="${player.pokemon[i].name}.png">
+          <img src="images/${player.pokemon[i].name}.png">
           `;
-            
         }
+      }
+
+      function fightTrainer() {
+        getRandomTrainer();
+        console.log(randomTrainer.name);
+        app.innerHTML = /*HTML*/ `
+    <div class="container">
+      <div class="opposingPokemon2">
+        <div class="opposingTrainersPokemon">
+          <img src="${randomTrainer.image}">
+          <div>${randomTrainer.name}</div>
+        </div>
+        <div class="opposingTrainersPokemon">
+          <img src="${randomTrainer.pokemon[0].image}">
+          <div>${randomTrainer.pokemon[0].name}</div>
+          <div>lvl: ${randomTrainer.pokemon[0].level}</div>
+          <div>health: ${randomTrainer.pokemon[0].health}</div>
+        </div>
+          
+       
+      </div>
+      
+      <div class="bottomScreen">
+          <div class="player2">
+            <div class="playerInfo">
+              ${playerTrainer}
+              <div>${playerName}</div>
+            </div>
+            <div class="playerPokemon">
+              <img src="${player.pokemon[0].image}">
+              <div>${player.pokemon[0].name}</div>
+              <div>lvl: ${player.pokemon[0].level}</div>
+              <div>health: ${player.pokemon[0].health}</div>
+            </div>
+          </div>
+  
+          <div class="buttonContainer">
+              <button onclick="fightPokemon()">Fight</button>    
+              <button onclick="fightTrainer()">Fight another</button>
+              <button onclick="showPokemon()">Show your pokemon</button>       
+          </div>
+  
+      </div>
+    </div>
+    `;
       }
 
       function getRandomPokemon() {
         let randomNum = Math.floor(Math.random() * possiblePokemon.length);
         randomPokemon = possiblePokemon[randomNum];
+      }
+
+      function getRandomTrainer() {
+        let randomNum1 = Math.floor(Math.random() * possibleTrainers.length);
+        randomTrainer = possibleTrainers[randomNum1];
       }
     </script>
   </body>

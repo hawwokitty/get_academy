@@ -4,6 +4,10 @@ html::-webkit-scrollbar {
   display: none;
 }
 
+body {
+  background-image: url(images/background.jpg);
+}
+
 #app {
   display: flex;
   align-items: center;
@@ -17,6 +21,16 @@ html::-webkit-scrollbar {
 
 .opposingPokemon {
   margin-left: 50%;
+}
+
+
+.opposingPokemon2 {
+  margin-left: 50%;
+  display: flex;
+}
+
+.player2 {
+  display: flex;
 }
 
 button {
@@ -48,4 +62,27 @@ img {
   align-items: center;
   justify-content: center;
   flex-direction: column;
+}
+
+#fangetPokemon img {
+  height: 100px;
+}
+
+.trainers:active {
+  opacity: 90%;
+}
+.trainers:hover {
+  transform: scale(1.2);
+}
+
+.clickedTrainer {
+  opacity: 50%;
+}
+
+.opposingTrainersPokemon {
+
+}
+
+.opposingTrainer {
+
 }

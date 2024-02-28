@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tampen brenner</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script>
+      const app = document.getElementById("app");
+      let yellow = 255;
+      let spotX;
+      let spotY;
+      let spotA;
+      let spotB;
+      updateView();
+      pickSpot();
+      function updateView() {
+        app.innerHTML = /*HTML*/ `
+        <div id="aroundSpot" onmousemove="myFunction(event)" onmouseout="colder()" style="margin-top:${spotB}px;margin-left:${spotA}px;
+          z-index:-1;position:absolute;
+          width:250px;height:250px;border-radius:50%;">
+        </div>
+          <div id="spot"  onmouseover="warmer()" 
+          style="margin-top:${spotY}px;margin-left:${spotX}px;z-index:2;position:absolute;
+          width:50px;height:50px;border-radius:50%;"></div>
+        <div>Spill tampen brenner!</div>
+        <div>Bruk musepekeren og let i vinduet etter det hemmelige punktet!</div>
+        <div>Denne indikerer om du er nærme:</div>
+        <div id="indicatorId">
+          <div style="height:100px; width:100px;border:1px solid black;
+          background-color:rgb(255,${yellow},0);"></div>
+        </div>
+        `;
+      }
+
+      let spotElement = document.getElementById("indicatorId");
+      let spot = document.getElementById("spot");
+
+      function pickSpot() {
+        spotX = Math.floor(Math.random() * window.innerWidth);
+        spotY = Math.floor(Math.random() * window.innerHeight);
+        spotA = spotX - 100;
+        spotB = spotY - 100;
+        console.log(spotX);
+        console.log(spotY);
+        console.log(spotA);
+        console.log(spotB);
+        updateView();
+      }
+
+      function myFunction(e) {
+        let x = e.clientX;
+        let y = e.clientY;
+        // console.log(x + " is x");
+        // console.log(y + " is y");
+
+        // let coor = "Coordinates: (" + x + "," + y + ")";
+        if (x >= spotA && x <= (spotA+50) || x >= (spotA+200) && x <= (spotA+250)) {
+          yellow = 200;
+          spotElement.innerHTML = /*HTML*/ `
+        <div style="height:100px; width:100px;border:1px solid black;
+          background-color:rgb(255,${yellow},0);"></div>
+        `;
+        } 
+        if (y >= spotB && y <= (spotB+50) || y >= (spotB+200) && y <= (spotB+250)) {
+          yellow = 200;
+          spotElement.innerHTML = /*HTML*/ `
+        <div style="height:100px; width:100px;border:1px solid black;
+          background-color:rgb(255,${yellow},0);"></div>
+        `;
+        } 
+        if (x >= (spotA+50) && x <= (spotA+100) || x >= (spotA+150) && x <= (spotA+200)) {
+          yellow = 150;
+          spotElement.innerHTML = /*HTML*/ `
+        <div style="height:100px; width:100px;border:1px solid black;
+          background-color:rgb(255,${yellow},0);"></div>
+        `;
+        } 
+        if (y >= (spotB+50) && y <= (spotB+100) || y >= (spotB+150) && y <= (spotB+200)) {
+          yellow = 150;
+          spotElement.innerHTML = /*HTML*/ `
+        <div style="height:100px; width:100px;border:1px solid black;
+          background-color:rgb(255,${yellow},0);"></div>
+        `;
+        } 
+      
+      }
+
+      function warmer() {
+        yellow = 0;
+        spot.innerHTML = /*HTML*/ `
+        <div style="height:50px; width:50px;
+          background-color:rgb(255,${yellow},0);border-radius:50%;"></div>
+        `;
+        spotElement.innerHTML = /*HTML*/ `
+        <div style="height:100px; width:100px;border:1px solid black;
+          background-color:rgb(255,0,0);"></div>`;
+      }
+      function colder() {
+        yellow = 255;
+        spotElement.innerHTML = /*HTML*/ `
+        <div style="height:100px; width:100px;border:1px solid black;
+          background-color:rgb(255,${yellow},0);"></div>
+        `;
+      }
+    </script>
+  </body>
+</html>

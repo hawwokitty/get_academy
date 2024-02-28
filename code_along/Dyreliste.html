@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dyreliste</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script>
+      const app = document.getElementById("app");
+      updateView();
+      function updateView() {
+        app.innerHTML = /*HTML*/ `
+            <div>
+                <button onclick="showRandomAnimal()">Random Animal</button>
+                <div id="animal"></div>
+                <div>Legg til flere dyr:
+                    <input id="inputAnimal" type="text">
+                    <button onclick="addAnimal()">Legg til</button>
+                    </div>
+                    <button onclick="showAllAnimals()">Show all animals</button>
+                    
+
+            </div>
+        `;
+      }
+      let DyreArray = ["Hund", "Katt", "Esel"];
+      let randomAnimal;
+      let showAnimal = document.getElementById("animal");
+      let allAnimals;
+      let animalToShow;
+
+      function showRandomAnimal() {
+        pickAnimal();
+        // for (i = 0; i < DyreArray.length; i++) {
+          animalToShow = DyreArray[randomAnimal];
+        // }
+        showAnimal.innerHTML = animalToShow;
+      }
+      function addAnimal() {
+        let newAnimal = document.getElementById("inputAnimal").value;
+        DyreArray.push(newAnimal);
+      }
+      function showAllAnimals() {
+        for (let i = 0; i < DyreArray.length; i++) {
+          allAnimals += DyreArray[i] + ", ";
+        }
+        console.log(DyreArray);
+        app.innerHTML = /*HTML*/ `
+            <div>
+                <button onclick="showRandomAnimal()">Random Animal</button>
+                <div id="animal"></div>
+                <div>Legg til flere dyr:
+                    <input id="inputAnimal" type="text">
+                    <button onclick="addAnimal()">Legg til</button>
+                    </div>
+                    <button onclick="updateView()">Hide all animals</button>
+                    <div id="allAnimals">${allAnimals}</div>
+
+            </div>
+        `;
+        
+      }
+      function pickAnimal() {
+        randomAnimal = Math.floor(Math.random() * DyreArray.length);
+      }
+    </script>
+  </body>
+</html>
