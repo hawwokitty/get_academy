@@ -1,0 +1,41 @@
+.cells {
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 200%;
+  }
+
+  .grid4 {
+    display: grid;
+    grid-template-columns: 200px 50px 50px 50px;
+    grid-template-rows: 200px 50px 50px 50px;
+  }
+  .grid6 {
+    display: grid;
+    grid-template-columns: 200px 50px 50px 50px 50px 50px;
+    grid-template-rows: 200px 50px 50px 50px 50px 50px;
+  }
+  /* .grid11 {
+    display: grid;
+    grid-template-columns: 200px 50px 50px 50px 50px 50px 50px 50px 50px 50px 50px;
+    grid-template-rows: 200px 50px 50px 50px 50px 50px 50px 50px 50px 50px 50px;
+  }
+  .grid16 {
+    display: grid;
+    grid-template-columns: 200px 50px 50px 50px 50px 50px 50px 50px 50px 50px 50px 50px 50px 50px 50px 50px;
+    grid-template-rows: 200px 50px 50px 50px 50px 50px 50px 50px 50px 50px 50px 50px 50px 50px 50px 50px;
+  } */
+
+  .coloredCells {
+    background-color: rgb(184, 35, 119);
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 200%;
+  }
+
+  .allText {
+    font-size: 200%;
+  }

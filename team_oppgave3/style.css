@@ -1,0 +1,137 @@
+
+#text {
+    float: left;
+    margin-top: 700px;
+}
+
+.overlay{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+}
+.hidden{
+    display: none;
+}
+.reset{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.game-status-text{
+  font-family: "Sixtyfour", sans-serif;
+  font-optical-sizing: auto;
+  font-size: 36px;
+  font-weight: 400;
+  font-style: normal;
+  animation: blink 1s infinite; /
+}
+@keyframes blink {
+    0% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+.play-again-button{
+    padding: 5px 10px;
+    border-radius: 20px;
+}
+
+#car {
+    position: absolute;
+    z-index: -1;
+    width: 1200px;  
+    height: 500px; 
+    margin: auto;
+}
+
+.carimg {
+    width: 100%;
+    position: absolute;
+    z-index: 9999; 
+}
+
+.road1 {
+    width: 50%;
+    right: 0;
+    height: 500px;
+    background: linear-gradient(30deg, rgb(30, 30, 30) 60%, white 60%);
+    z-index: -3;
+    position: absolute;
+}
+.road2 {
+    width: 50%;
+    height: 500px;
+    background: linear-gradient(150deg, white 38%, rgb(30, 30, 30) 38%);
+    z-index: -3;
+    position: absolute;
+}
+.road-lines {
+    /* height: 500px;
+    width: 10px;
+    background-color: rgb(255, 13, 13);
+    z-index: -2;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center; idk */ 
+}
+
+#objects {
+    /* display: flex;
+    align-items: center;
+    justify-content: center; */
+}
+
+.btn {
+    z-index: 99999;
+}
+
+.objimg {
+    width: 200px;
+    position:absolute;
+    z-index: 2;
+    margin-top:-690px;
+    margin-left: 40%;
+}
+
+#coolnessBarContainer {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 25px;
+  background-color: #ccc;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+#coolnessBar {
+  height: 100%;
+  background-color: green;
+  width: 0%;
+  border-radius: 10px;
+  transition: width 0.5 ease;
+}
+
+#gameStatus {
+  position: absolute;
+  top: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #333;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+}
