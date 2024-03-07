@@ -15,8 +15,8 @@ function makeBoard() {
     let cellsHtml = "";
     for (let i = 0; i < board * board; i++) {
       /* draws out the cells which are picked */
-      if (board == 4) {
-        if (coloredCellArray.includes(i)) {
+      if (board == 4) { /* draws out the 3x3 board */
+        if (coloredCellArray.includes(i)) { /* draws out the colored cells */
           cellsHtml += /*HTML*/ `<div id="${i}" class="coloredCells" onclick="pickCell(this.id)" onmouseover="hoverCell(this.id)"></div>`;
         } else if (i == 1) {
           cellsHtml += /*HTML*/ `<div id="${i}" class="cells">${listOfPossible3x3Nonograms[randomNonogram].columns[0]}</div>`;
@@ -30,7 +30,7 @@ function makeBoard() {
           cellsHtml += /*HTML*/ `<div id="${i}" class="cells">${listOfPossible3x3Nonograms[randomNonogram].rows[1]}</div>`;
         } else if (i == 12) {
           cellsHtml += /*HTML*/ `<div id="${i}" class="cells">${listOfPossible3x3Nonograms[randomNonogram].rows[2]}</div>`;
-        } else {
+        } else { /* draws out the non-colored or cells filled with X */
           if (rightClickCellArray.includes(i)) {
             cellsHtml += /*HTML*/ `<div id="${i}" class="cells" onclick="pickCell(this.id)" onmouseover="hoverCell(this.id)">x</div>`;
           } else {
@@ -75,7 +75,7 @@ function makeBoard() {
       <div id="grid" class="grid${board}">
         ${cellsHtml}
         </div>
-        <div class="allText" id="lives">you have ${lives} lives left</div>
+        <div class="allText" id="lives">You have ${lives} lives left</div>
         <div class="allText" id="score">${result ?? ""}</div>
         `;
   }

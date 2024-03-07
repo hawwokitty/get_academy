@@ -2,17 +2,13 @@
  function chooseBoard(boardSize) {
     board = Number(boardSize); /* sets number of cells to "board" */
     rNG();
-    console.log(randomNonogram);
-    console.log(board);
-    pickBoard = false;
+    pickBoard = false; /* since we are no longer picking a board */
     makeBoard();
   }
 
-  // let grid = document.getElementById("grid");
-  app.addEventListener("contextmenu", (e) => {
-    e.preventDefault();
+  app.addEventListener("contextmenu", (e) => { 
+    e.preventDefault(); /* prevents you from getting the "conext menu" when right clicking */
     rightClick();
-    onmouseover;
   });
 
   function hoverCell(rightClickCell) {
@@ -27,7 +23,6 @@
       let deleteCell = rightClickCellArray.indexOf(currentHoverCell);
       rightClickCellArray.splice(deleteCell, 1);
     }
-    console.log(rightClickCellArray);
     makeBoard();
   }
 
@@ -43,7 +38,6 @@
       coloredCellArray.splice(deleteCell, 1);
     }
 
-    console.log(coloredCellArray);
     checkArray();
     makeBoard();
   }
