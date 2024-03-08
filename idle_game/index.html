@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Idle game</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script>
+      const app = document.getElementById("app");
+      // cats
+      const cats = [
+        {
+          name: "Angel",
+          love: 0,
+          upgrades: 0,
+          imgPath: "images/neko_angel.png",
+        },
+        { name: "Alice", love: 0, upgrades: 0, imgPath: "images/neko_ass.png" },
+        {
+          name: "Bartholomew",
+          love: 0,
+          upgrades: 0,
+          imgPath: "images/neko_demon.png",
+        },
+        { name: "Simon", love: 0, upgrades: 0, imgPath: "images/neko_dot.png" },
+        {
+          name: "Crickle",
+          love: 0,
+          upgrades: 0,
+          imgPath: "images/neko_drool.png",
+        },
+      ];
+
+      game();
+      function game() {
+        let catsHtml = "";
+        for (let cat of cats) {
+          console.log(cat);
+          catsHtml += /*HTML*/ `
+            <div id="cats">
+                <img onclick="gainLove(${cat.love})" src="${cat.imgPath}">
+                <div>${cat.name} has ${cat.love} love</div>
+                </div>
+                `;
+        }
+        app.innerHTML = /*HTML*/ `
+        ${catsHtml}
+        `;
+      }
+
+      function intervalTime() {
+        setInterval(game, 1);
+      }
+
+      function gainLove(catsLove) {
+        console.log(catsLove);
+        catsLove++;
+        game();
+      }
+    </script>
+  </body>
+</html>

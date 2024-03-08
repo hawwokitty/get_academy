@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nonogram</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://code.jquery.com/qunit/qunit-2.20.1.css">
+  </head>
+  <body>
+    <div id="app"></div>
+    <script src="script/model.js"></script>
+    <!-- <script src="script/view.js"></script> -->
+    <script src="script/controller.js"></script>
+    <div id="qunit"></div>
+    <div id="qunit-fixture"></div>
+    <script src="https://code.jquery.com/qunit/qunit-2.20.1.js"></script>
+
+<script>
+    QUnit.test('if nonogram array is full', function (assert) {
+        // arrange
+        coloredCellArray = [];
+        let expectedCellArray = [5];
+        // act
+        pickCell(5);
+        // assert
+        assert.deepEqual(coloredCellArray,expectedCellArray);
+    })
+    QUnit.test('if nonogram array has number already', function (assert) {
+        // arrange
+        coloredCellArray = [5];
+        let expectedCellArray = [];
+        // act
+        pickCell(5);
+        // assert
+        assert.deepEqual(coloredCellArray,expectedCellArray);
+    })
+
+
+function makeBoard() {
+    console.log("blank");
+}
+</script>
+
+  </body>
+</html>

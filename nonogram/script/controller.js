@@ -1,18 +1,18 @@
  //controller
  function chooseBoard(boardSize) {
     board = Number(boardSize); /* sets number of cells to "board" */
-    rNG();
+    pickAnswer();
     pickBoard = false; /* since we are no longer picking a board */
     makeBoard();
   }
 
   app.addEventListener("contextmenu", (e) => { 
     e.preventDefault(); /* prevents you from getting the "conext menu" when right clicking */
-    rightClick();
+    rightClick(); /* runs the function to fill cells with X when right clicking */
   });
 
   function hoverCell(rightClickCell) {
-    currentHoverCell = Number(rightClickCell);
+    currentHoverCell = Number(rightClickCell); /* checks which cell you are hovering over to add in the right click function */
   }
   function rightClick() {
     if (!rightClickCellArray.includes(currentHoverCell)) {
@@ -43,60 +43,47 @@
   }
 
   function checkArray() {
-    if (board == 4) {
-      let answerNonogram = listOfPossible3x3Nonograms[randomNonogram];
       if (
         !answerNonogram.cellArray.includes(
           Number(coloredCellArray.slice(-1))
-        )
+        ) /* if the last cell you just clicked is not in the answer, lose a life (but this makes you lose a life if you click the right cell then remove it) */
       ) {
         lives--;
       }
       coloredCellArray.sort(function (a, b) {
         return a - b;
-      });
+      }); /* sort the array in order to compare it to the answer */
       if (
-        answerNonogram.cellArray.toString() == coloredCellArray.toString()
+        answerNonogram.cellArray.toString() === coloredCellArray.toString() /* compare current array with answer */
       ) {
         result = "Congrats! You got it!";
       }
-    }
-    if (board == 6) {
-      let answerNonogram = listOfPossible5x5Nonograms[randomNonogram];
-      if (
-        !answerNonogram.cellArray.includes(
-          Number(coloredCellArray.slice(-1))
-        )
-      ) {
-        lives--;
-      }
-      coloredCellArray.sort(function (a, b) {
-        return a - b;
-      });
-      if (
-        answerNonogram.cellArray.toString() == coloredCellArray.toString()
-      ) {
-        result = "Congrats! You got it!";
-      }
-    }
     checkLives();
     makeBoard();
   }
-  function checkLives() {
+
+  function checkLives() { /* checks if you lost */
     if (lives <= 0) {
       result = "Aww, you lost!";
     }
   }
 
-  function rNG() {
-    if (board == 4) {
-      randomNonogram = Math.floor(
+  function pickAnswer() { /* picks a random board to be the answer */
+  let randomNumber;
+    if (board === 4) {
+      randomNumber = Math.floor(
         Math.random() * listOfPossible3x3Nonograms.length
       );
     }
-    if (board == 6) {
-      randomNonogram = Math.floor(
+    if (board === 6) {
+      randomNumber = Math.floor(
         Math.random() * listOfPossible5x5Nonograms.length
       );
     }
+    
+  if (board === 4) { /* runs when you have the 3x3 board */
+    answerNonogram = listOfPossible3x3Nonograms[randomNumber]; /* picks out the answer nonogram to compare to */
+  } else if (board === 6) {
+    answerNonogram = listOfPossible5x5Nonograms[randomNumber];
+  }
   }

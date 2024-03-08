@@ -5,9 +5,9 @@
  let lives = 3;
  let currentHoverCell;
  let board;
- let randomNonogram;
  let coloredCellArray = [];
  let rightClickCellArray = [];
+ let answerNonogram;
  // 3x3 nonograms:
  let nonogram3x3n1 = {
    cellArray: [5, 6, 9, 10, 11, 14],
