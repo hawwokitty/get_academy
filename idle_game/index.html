@@ -5,149 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Idle game</title>
     <style>
-      #tree {
+      .tree {
         width: 120px;
+      }
+
+      .catImg:active {
+        scale: 1.1;
       }
     </style>
   </head>
-  <body>
+  <body onload="refreshEveryTenSec()">
     <div id="app"></div>
-    <script>
-      const app = document.getElementById("app");
-      let yourLove = 0;
-      let catTree;
-      let buyCatTree;
-      // cats
-      const cats = [
-        {
-          name: "Angel",
-          love: 0,
-          upgrades: 0,
-          imgPath: "images/neko_angel.png",
-        },
-        { name: "Alice", love: 0, upgrades: 0, imgPath: "images/neko_ass.png" },
-        {
-          name: "Bartholomew",
-          love: 0,
-          upgrades: 0,
-          imgPath: "images/neko_demon.png",
-        },
-        { name: "Simon", love: 0, upgrades: 0, imgPath: "images/neko_dot.png" },
-        {
-          name: "Crickle",
-          love: 0,
-          upgrades: 0,
-          imgPath: "images/neko_drool.png",
-        },
-      ];
-      // add ons
-      const trees = [
-        {
-          name: "tree1",
-          automate: 1,
-          imgPath: "images/tree1.png",
-        },
-        {
-          name: "tree2",
-          automate: 2,
-          imgPath: "images/tree2.png",
-        },
-        {
-          name: "tree3",
-          automate: 3,
-          imgPath: "images/tree3.png",
-        },
-      ];
-
-      game();
-      function game() {
-        let catsHtml = "";
-        for (let cat of cats) {
-          // if you have high enough love, you can buy upgrades
-          if (yourLove > 10) {
-            buyCatTree = /*HTML*/ `
-            <button id="${cat.name}" onclick="buyTree(this.id)">Buy cat tree (cost 10 love)</button>
-            `;
-          }
-          if (catTree) {
-            let tree = trees.find((tree) => tree.name === "tree1");
-            catTree = /*HTML*/ `
-        <img id="tree" src="${tree.imgPath}">
-        `;
-          }
-          if (cat.upgrades > 0) {
-            catsHtml += /*HTML*/ `
-            <div id="cats">
-                <img id="${cat.name}" onclick="gainLove(this.id)" src="${
-              cat.imgPath
-            }">
-                ${catTree}
-                ${buyCatTree ?? ""}
-                <div>${cat.name} has ${cat.love} love, and ${
-              cat.upgrades
-            } upgrades</div>
-                </div>
-                `;
-          } else {
-            catsHtml += /*HTML*/ `
-              <div id="cats">
-                  <img id="${cat.name}" onclick="gainLove(this.id)" src="${
-              cat.imgPath
-            }">
-                  ${buyCatTree ?? ""}
-                  <div>${cat.name} has ${cat.love} love, and ${
-              cat.upgrades
-            } upgrades</div>
-                  </div>
-                  `;
-          }
-        }
-        app.innerHTML = /*HTML*/ `
-        ${catsHtml}
-        <div>Your love is: ${yourLove}</div>
-        `;
-      }
-
-      function intervalTime() {
-        setInterval(game, 1);
-      }
-
-      function buyTree(catsName) {
-        
-        let cat = cats.find((cat) => cat.name === catsName);
-        cat.upgrades++;
-        catTree = true;
-        updateLove('test');
-        game();
-      }
-
-      function gainLove(catsName) {
-        // for (let cat of cats) {
-        //   if (cat.name === catsName) {
-        //     cat.love++;
-        //   }
-        // }
-        let cat = cats.find((cat) => cat.name === catsName);
-        cat.love++;
-        updateLove();
-        game();
-      }
-
-      function updateLove(x) {
-        let allCatsLove = [];
-        for (let cat of cats) {
-          allCatsLove.push(cat.love);
-        }
-        let sum = 0;
-        allCatsLove.forEach((e) => {
-          sum += e;
-          if (x === 'test') {
-            buyCatTree = null;
-            sum = sum - 10;
-          }
-        });
-        yourLove = sum;
-      }
-    </script>
+    <script src="js/model.js"></script>
+    <script src="js/view.js"></script>
+    <script src="js/controller.js"></script>
   </body>
 </html>

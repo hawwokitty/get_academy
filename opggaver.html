@@ -43,51 +43,37 @@
     
     </style>
 </head>
-<body onload="lightTimer()">
+<body>
 
-    <div id="trafikklys">
-        <div id="rød" class="rød sirkel"></div>
-        <div id="orange" class="orange sirkel"></div>
-        <div id="grønn" class="grønn sirkel"></div>
-    </div>
+  <button onclick="upgrade('Bianca')">do it</button>
 
-    <button onclick="activeLight('grønn', 'orange', 'rød', 'rød')">rød</button>
-    <button onclick="activeLight('grønn','grønn', 'rød', 'orange')">rød og orange</button>
-   
-    <button onclick="activeLight('rød', 'orange', 'grønn', 'grønn')">grønn</button>
-    <button onclick="activeLight('rød', 'grønn', 'orange', 'orange')">orange</button>
-
-    <script>
-        function activeOrange(){
-            activeLight('rød', 'grønn', 'orange', 'orange'); 
-        } 
-
-        function lightTimer(){
-            setTimeout(activeRed, 1000)
+  <script>
+        let hasBeenCalled = false;
+        function upgrade(catsName) {
+            let callOnce = createOnceFunction(catsName);
+            callOnce(catsName);
         }
+// Function that returns a once function
+function createOnceFunction(catsName) {
+	return function () {
+		if (!hasBeenCalled) {
+			console.log('Function called!');
+			console.log(catsName);
+			hasBeenCalled = true;
+		} else {
+			console.log('Function can only be called once.');
+		}
+	};
+}
 
-        function activeGreen(){
-            activeLight('rød', 'orange', 'grønn', 'grønn');
-            setTimeout(activeOrange, 2000);
-        }
-      
+// Create the once function
 
-        function activeLight(divId1, divId2, divId3, divId4){
-            document.getElementById(divId1).classList.remove("active");
-            document.getElementById(divId2).classList.remove("active");
-            document.getElementById(divId3).classList.add("active");
-            document.getElementById(divId4).classList.add("active");
-        }
-        function activeRed(){
-            activeLight('grønn', 'orange', 'rød', 'rød');
-            setTimeout(activeRedAndOrange, 1000)
+// // Call the function the first time
+// callOnce(); // Output: Function called!
 
-        }
+// // Call the function again
+// callOnce(); // Output: Function can only be called once.
 
-        function activeRedAndOrange(){
-            activeLight('grønn','grønn', 'rød', 'orange')
-            setTimeout(activeGreen, 1000)
-        }
 
     </script>
     
