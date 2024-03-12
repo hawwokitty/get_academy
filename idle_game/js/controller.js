@@ -51,14 +51,14 @@ function buyANewCat() {
     game();
   }
 
-  function buyYarnFunction(catsButtonName) {
-    let cat = cats.find((cat) => cat.button === catsButtonName);
-    cat.love -= 10;
-    showYarn = true;
-    buyYarn = null;
-    updateLove();
-    game();
-  }
+//   function buyYarn(catsButtonName) {
+//     let cat = cats.find((cat) => cat.button === catsButtonName);
+//     cat.love -= 10;
+//     showYarn = true;
+//     buyYarn = null;
+//     updateLove();
+//     game();
+//   }
 
   function buyUpgrade(catsButtonName, cost) {
     let cat = cats.find((cat) => cat.button === catsButtonName);

@@ -109,6 +109,7 @@ for (let i = 0; i < catsOwned; i++) {
         ${catsHtml}
         ${buyCatButton ?? ""}
         <div id="yourLove">Your love is: ${yourLove}</div>
+        <div>Next cat will cost ${buyCatCost} love</div>
         `;
   buyCatButton = null;
 }
