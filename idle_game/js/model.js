@@ -263,3 +263,4 @@ const app = document.getElementById("app");
           imgPath: "images/tree3.png",
         },
       ];
+      const yarn = "images/yarn.png";
