@@ -8,7 +8,7 @@ function buyANewCat() {
     if (yourLove > buyCatCost) {
         catsOwned++;
         buyCat = false;
-        tempLove = tempLove - buyCatCost;
+        tempLove -= buyCatCost;
         buyCatCost = buyCatCost*2;
     } else {
         console.log('You cant afford that');
@@ -30,9 +30,9 @@ function buyANewCat() {
     if (cat.upgrades === 1) {
       cat.love++;
     } else if (cat.upgrades === 2) {
-      cat.love = cat.love + 4;
+      cat.love += 4;
     } else if (cat.upgrades === 3) {
-      cat.love = cat.love + 8;
+      cat.love += 8;
     }
     let catsId = "#" + cat.desc;
     document.querySelector(
@@ -44,7 +44,7 @@ function buyANewCat() {
   function buyTree(catsButtonName) {
     let cat = cats.find((cat) => cat.button === catsButtonName);
     cat.upgrades++;
-    cat.love = cat.love - 10;
+    cat.love -= 10;
     catTree = true;
     buyCatTree = null;
     updateLove();
@@ -53,7 +53,7 @@ function buyANewCat() {
 
   function buyYarnFunction(catsButtonName) {
     let cat = cats.find((cat) => cat.button === catsButtonName);
-    cat.love = cat.love - 10;
+    cat.love -= 10;
     showYarn = true;
     buyYarn = null;
     updateLove();
@@ -63,7 +63,7 @@ function buyANewCat() {
   function buyUpgrade(catsButtonName, cost) {
     let cat = cats.find((cat) => cat.button === catsButtonName);
     cat.upgrades++;
-    cat.love = cat.love - cost;
+    cat.love -= cost;
     upgradeTree = null;
     updateLove();
     game();
