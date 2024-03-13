@@ -31,7 +31,7 @@ function buyANewCat() {
       cat.love++;
     } else if (cat.upgrades === 2) {
       cat.love += 4;
-    } else if (cat.upgrades === 3 && cat.hasYarn === 1) {
+    } else if (cat.upgrades === 3 && cat.hasYarn > 0) {
       cat.love += 16*cat.hasYarn;
     } else if (cat.upgrades === 3) {
       cat.love += 8;

@@ -64,11 +64,11 @@ function game() {
       upgradeTree = /*HTML*/ `
             <button id="${cat.button}" onclick="buyUpgrade(this.id,200)">Upgrade cat tree (cost 200 love from cat)</button>
             `;
-    } else if (cat.upgrades === 3 && cat.love >= 1000 && yourLove >= 1000) {
+    } else if (cat.upgrades === 3 && cat.love >= 1000 && yourLove >= 1000 && cat.hasYarn === 0) {
       buyYarnButton = /*HTML*/ `
             <button id="${cat.button}" onclick="buyYarn(this.id)">Buy yarn (cost 1000 love from cat)</button>
             `;
-    } else if (cat.upgrades === 3 && cat.love >= 2000 && yourLove >= 2000) {
+    } else if (cat.upgrades === 3 && cat.love >= 2000 && yourLove >= 2000 && cat.hasYarn === 1) {
       buyYarnButton = /*HTML*/ `
             <button id="${cat.button}" onclick="buyYarn(this.id)">Buy more yarn (cost 2000 love from cat)</button>
             `;
@@ -108,6 +108,7 @@ function game() {
               ${catTreeHtml ?? ""}
               ${yarnHtml ?? ""}
               ${upgradeTree ?? ""}
+              ${buyYarnButton ?? ""}
               ${catsDescription}
               </div>
               `;
