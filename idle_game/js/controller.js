@@ -31,6 +31,8 @@ function buyANewCat() {
       cat.love++;
     } else if (cat.upgrades === 2) {
       cat.love += 4;
+    } else if (cat.upgrades === 3 && cat.hasYarn === 1) {
+      cat.love += 16*cat.hasYarn;
     } else if (cat.upgrades === 3) {
       cat.love += 8;
     }
@@ -51,14 +53,14 @@ function buyANewCat() {
     game();
   }
 
-//   function buyYarn(catsButtonName) {
-//     let cat = cats.find((cat) => cat.button === catsButtonName);
-//     cat.love -= 10;
-//     showYarn = true;
-//     buyYarn = null;
-//     updateLove();
-//     game();
-//   }
+  function buyYarn(catsButtonName) {
+    let cat = cats.find((cat) => cat.button === catsButtonName);
+    cat.love -= 1000;
+    cat.hasYarn++;
+    boughtYarn = true;
+    updateLove();
+    game();
+  }
 
   function buyUpgrade(catsButtonName, cost) {
     let cat = cats.find((cat) => cat.button === catsButtonName);

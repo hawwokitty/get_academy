@@ -2,7 +2,7 @@ game();
 function game() {
   let catsHtml = "";
   let catTreeHtml;
-
+  let yarnHtml;
   // checks if buy cat button should show or not
   if (yourLove > buyCatCost && catsOwned < cats.length) {
     buyCat = true;
@@ -15,19 +15,19 @@ function game() {
 
   // start with one cat and buy more
   let arrayOfCurrentCats = [];
-for (let i = 0; i < catsOwned; i++) {
-  arrayOfCurrentCats.push(cats[i]);
-}
-// under is prototype of above code lol
-//   let arrayOfCurrentCats = [];
-//   for (let i = 0; i < catsOwned; i++) {
-//     for (let cat of cats) {
-//       if (arrayOfCurrentCats.length >= catsOwned) {
-//         break;
-//       }
-//       arrayOfCurrentCats.push(cat);
-//     }
-//   }
+  for (let i = 0; i < catsOwned; i++) {
+    arrayOfCurrentCats.push(cats[i]);
+  }
+  // under is prototype of above code lol
+  //   let arrayOfCurrentCats = [];
+  //   for (let i = 0; i < catsOwned; i++) {
+  //     for (let cat of cats) {
+  //       if (arrayOfCurrentCats.length >= catsOwned) {
+  //         break;
+  //       }
+  //       arrayOfCurrentCats.push(cat);
+  //     }
+  //   }
   // says what catsHtml should be
   for (let cat of arrayOfCurrentCats) {
     let catsDescription = /*HTML*/ `<div id="${cat.desc}">${cat.name} has ${cat.love} love, and ${cat.upgrades} upgrades</div>`;
@@ -55,7 +55,7 @@ for (let i = 0; i < catsOwned; i++) {
         `;
       }
     }
-    // if cat tree can be upgraded make "upgradeTree" into HTML
+    // if cat tree can be upgraded make "upgradeTree" into HTML & buyYarnButton into HTML
     if (cat.upgrades === 1 && cat.love >= 20 && yourLove >= 20) {
       upgradeTree = /*HTML*/ `
             <button id="${cat.button}" onclick="buyUpgrade(this.id,20)">Upgrade cat tree (cost 20 love from cat)</button>
@@ -64,7 +64,23 @@ for (let i = 0; i < catsOwned; i++) {
       upgradeTree = /*HTML*/ `
             <button id="${cat.button}" onclick="buyUpgrade(this.id,200)">Upgrade cat tree (cost 200 love from cat)</button>
             `;
+    } else if (cat.upgrades === 3 && cat.love >= 1000 && yourLove >= 1000) {
+      buyYarnButton = /*HTML*/ `
+            <button id="${cat.button}" onclick="buyYarn(this.id)">Buy yarn (cost 1000 love from cat)</button>
+            `;
+    } else if (cat.upgrades === 3 && cat.love >= 2000 && yourLove >= 2000) {
+      buyYarnButton = /*HTML*/ `
+            <button id="${cat.button}" onclick="buyYarn(this.id)">Buy more yarn (cost 2000 love from cat)</button>
+            `;
     }
+
+    // if you have enought upgrades you can buy yarn
+    if (boughtYarn) {
+      yarnHtml = /*HTML*/ `
+      <img class="tree" src="${yarn}">
+      `;
+    }
+
     // if you have high enough love, you can buy upgrades
     if (cat.love > 10 && cat.upgrades === 0 && yourLove >= 10) {
       buyCatTree = /*HTML*/ `
@@ -81,6 +97,35 @@ for (let i = 0; i < catsOwned; i++) {
                     ${catsDescription}
                     </div>
                     `;
+    } else if (cat.hasYarn === 1) {
+      catsHtml += /*HTML*/ `
+          <div class="cats">
+              <img id="${
+                cat.name
+              }" class="catImg" onclick="gainLove(this.id)" src="${
+        cat.imgPath
+      }">
+              ${catTreeHtml ?? ""}
+              ${yarnHtml ?? ""}
+              ${upgradeTree ?? ""}
+              ${catsDescription}
+              </div>
+              `;
+    } else if (cat.hasYarn === 2) {
+      catsHtml += /*HTML*/ `
+          <div class="cats">
+              <img id="${
+                cat.name
+              }" class="catImg" onclick="gainLove(this.id)" src="${
+        cat.imgPath
+      }">
+              ${catTreeHtml ?? ""}
+              ${yarnHtml ?? ""}
+              ${yarnHtml ?? ""}
+              ${upgradeTree ?? ""}
+              ${catsDescription}
+              </div>
+              `;
     } else if (cat.upgrades > 0) {
       catsHtml += /*HTML*/ `
           <div class="cats">
@@ -91,6 +136,7 @@ for (let i = 0; i < catsOwned; i++) {
       }">
               ${catTreeHtml ?? ""}
               ${upgradeTree ?? ""}
+              ${buyYarnButton ?? ""}
               ${catsDescription}
               </div>
               `;
@@ -103,6 +149,7 @@ for (let i = 0; i < catsOwned; i++) {
               `;
     }
     upgradeTree = null;
+    buyYarnButton = null;
   } // end of for-loop for what catsHtml should be
 
   app.innerHTML = /*HTML*/ `
