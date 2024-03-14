@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Slideshow</title>
+    <style>
+      .carouselContainer {
+        width: 500px;
+        height: 100vh;
+        margin: 0 auto;
+        overflow: hidden;
+      }
+
+      .carousel {
+       position: relative;
+       transform: translateY(50%);
+        
+      }
+      .img {
+        position: absolute;
+        width: 500px;
+        height: 650px;
+        object-fit: cover;
+        z-index: -999;
+        transition: transform 1s ease;
+      }
+
+      .btn1,
+      .btn2 {
+        position: absolute;
+        cursor: pointer;
+        width: 50px;
+        color: white;
+        font-weight: bold;
+        font-size: 200%;
+        user-select: none;
+        height:650px;
+        z-index: 999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      
+      .btn1 {
+        left: 0;
+      }
+      .btn2 {
+       right: 0;
+      }
+      
+      .btn1:hover, .btn2:hover {
+        background-color: rgb(246, 114, 255, 0.5);
+      }
+    </style>
+  </head>
+  <body onload="slideShowAutomatic()">
+    <div id="app"></div>
+    <script>
+      // model
+      const app = document.getElementById("app");
+      const pics = [
+        {
+          imgSrc: "images/1.png",
+          altText: "Dissociating",
+        },
+        {
+          imgSrc: "images/2.png",
+          altText: "Crying face with voices saying 'stop trying' and 'give up'",
+        },
+        {
+          imgSrc: "images/3.png",
+          altText: "Abstract red art",
+        },
+        {
+          imgSrc: "images/4.png",
+          altText: "Fallen angel",
+        },
+        {
+          imgSrc: "images/5.png",
+          altText:
+            "Presumably a female figure with one eye, and something strange in her stomach",
+        },
+        {
+          imgSrc: "images/6.png",
+          altText:
+            "Someone looking in the mirror with the feeling of being judged",
+        },
+        {
+          imgSrc: "images/7.png",
+          altText: "Scream",
+        },
+        {
+          imgSrc: "images/8.png",
+          altText: "Contemplating",
+        },
+        {
+          imgSrc: "images/9.png",
+          altText: "A torso with a hollow heart and roses flowing through",
+        },
+        {
+          imgSrc: "images/10.png",
+          altText:
+            "A skull with a (presumably) knife going straight through the head",
+        },
+      ];
+      let currentPic;
+      let CurrentPicAltText;
+      let i = 0;
+      let myInterval;
+
+      // view
+      updateView();
+      function updateView() {
+        if (i < pics.length) {
+          currentPic = pics[i].imgSrc;
+          CurrentPicAltText = pics[i].altText;
+        } else {
+          i = 0;
+          currentPic = pics[i].imgSrc;
+          CurrentPicAltText = pics[i].altText;
+        }
+        app.innerHTML = /*HTML*/ `
+        <div class="carouselContainer">
+            <div class="carousel">
+              <div class="btn1" id="previous" onclick='swapPic(this.id,"")'>❮</div>
+              <img class="img" src="${currentPic}" alt="${CurrentPicAltText}" title="${CurrentPicAltText}">
+              <div class="btn2" id="next" onclick='swapPic(this.id,true)'>❯</div>
+               
+            </div>    
+
+
+        </div>
+    `;
+      }
+//controller
+      function swapPic(buttonFunction, stop) {
+        if (buttonFunction === "next" && stop) {
+          i++;
+          clearInterval(myInterval);
+        } else if (buttonFunction === "next" && !stop) {
+          i++;
+        } else if (buttonFunction === "previous") {
+          if (i === 0) {
+            i = pics.length - 1;
+          } else {
+            i--;
+          }
+          clearInterval(myInterval);
+        }
+        updateView();
+      }
+
+      function slideShowAutomatic() {
+        myInterval = setInterval(function () {
+          swapPic("next", false);
+        }, 3000);
+      }
+    </script>
+  </body>
+</html>
