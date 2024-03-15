@@ -137,7 +137,7 @@
       //controller
       function showSlide(x, stopSlideshow) {
         let slidesStyle = document.getElementById("slides");
-        showPage = showPage + x;
+        showPage += x;
         if (showPage === -1) {
           showPage = pics.length - 1;
         } else if (showPage === pics.length) {
