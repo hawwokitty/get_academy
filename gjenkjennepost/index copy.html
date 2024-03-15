@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gjenkjenn epostadresse</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script>
+      let email = "";
+      const emailPattern = /^.+@.+\..+$/;
+
+      view();
+      function view() {
+        app.innerHTML = /*HTML*/ `
+            <input id="input" type="text">
+            <button onclick="getResponse()">sjekk epost</button>
+            <div id="response"></div>
+        `;
+      }
+
+      function getResponse() {
+        let email = document.getElementById("input").value;
+        let response = document.getElementById("response");
+        if (emailPattern.test(email)) {
+          response.innerHTML = "Thats an email yep";
+        } else {
+          response.innerHTML = "Thats NOT an email!! try again!";
+        }
+      }
+
+    </script>
+  </body>
+</html>
