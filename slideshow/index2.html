@@ -6,24 +6,25 @@
     <title>Slideshow</title>
     <style>
       .carouselContainer {
-        width: 500px;
+        width: 470px;
         height: 100vh;
         margin: 0 auto;
         overflow: hidden;
       }
 
       .carousel {
-       position: relative;
-       transform: translateY(50%);
-        
+        position: relative;
+      }
+      #slides {
+        display: flex;
+        transition: transform 1s ease;
+        transform: translateX(0%);
       }
       .img {
-        position: absolute;
-        width: 500px;
+        width: 470px;
         height: 650px;
         object-fit: cover;
         z-index: -999;
-        transition: transform 1s ease;
       }
 
       .btn1,
@@ -35,21 +36,22 @@
         font-weight: bold;
         font-size: 200%;
         user-select: none;
-        height:650px;
+        height: 650px;
         z-index: 999;
         display: flex;
         align-items: center;
         justify-content: center;
       }
-      
+
       .btn1 {
         left: 0;
       }
       .btn2 {
-       right: 0;
+        right: 0;
       }
-      
-      .btn1:hover, .btn2:hover {
+
+      .btn1:hover,
+      .btn2:hover {
         background-color: rgb(246, 114, 255, 0.5);
       }
     </style>
@@ -104,28 +106,27 @@
             "A skull with a (presumably) knife going straight through the head",
         },
       ];
-      let currentPic;
-      let CurrentPicAltText;
-      let i = 0;
+      // let currentPic;
+      // let CurrentPicAltText;
+      // let i = 0;
       let myInterval;
+      let showPage = 0;
 
       // view
       updateView();
       function updateView() {
-        if (i < pics.length) {
-          currentPic = pics[i].imgSrc;
-          CurrentPicAltText = pics[i].altText;
-        } else {
-          i = 0;
-          currentPic = pics[i].imgSrc;
-          CurrentPicAltText = pics[i].altText;
+        let slidesHtml = "";
+        for (let pic of pics) {
+          slidesHtml += /*HTML*/ `
+        <img class="img" src="${pic.imgSrc}" alt="${pic.altText}" title="${pic.altText}">
+        `;
         }
         app.innerHTML = /*HTML*/ `
         <div class="carouselContainer">
             <div class="carousel">
-              <div class="btn1" id="previous" onclick='swapPic(this.id,"")'>❮</div>
-              <img class="img" src="${currentPic}" alt="${CurrentPicAltText}" title="${CurrentPicAltText}">
-              <div class="btn2" id="next" onclick='swapPic(this.id,true)'>❯</div>
+              <div class="btn1" id="previous" onclick='showSlide(-1,true)'>❮</div>
+              <div class="btn2" id="next" onclick='showSlide(1,true)'>❯</div>
+              <div id="slides">${slidesHtml}</div>
                
             </div>    
 
@@ -133,27 +134,25 @@
         </div>
     `;
       }
-//controller
-      function swapPic(buttonFunction, stop) {
-        if (buttonFunction === "next" && stop) {
-          i++;
-          clearInterval(myInterval);
-        } else if (buttonFunction === "next" && !stop) {
-          i++;
-        } else if (buttonFunction === "previous") {
-          if (i === 0) {
-            i = pics.length - 1;
-          } else {
-            i--;
-          }
+      //controller
+      function showSlide(x, stopSlideshow) {
+        let slidesStyle = document.getElementById("slides");
+        showPage = showPage + x;
+        if (showPage === -1) {
+          showPage = pics.length - 1;
+        } else if (showPage === pics.length) {
+          showPage = 0;
+        }
+        slidesStyle.style.transform = `translateX(-${showPage}00%)`;
+        if (stopSlideshow) {
           clearInterval(myInterval);
         }
-        updateView();
       }
+
 
       function slideShowAutomatic() {
         myInterval = setInterval(function () {
-          swapPic("next", false);
+          showSlide(1, false);
         }, 3000);
       }
     </script>
