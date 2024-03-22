@@ -96,21 +96,20 @@ function updateLove() {
 function saveToLocalStorage() {
   localStorage.setItem("myCatsData", JSON.stringify(cats));
   localStorage.setItem("myNumberOfCats", catsOwned);
+  localStorage.setItem("catCost", buyCatCost);
   console.log('saved');
 }
 
 function loadFromLocalStorage() {
   cats = JSON.parse(localStorage.getItem("myCatsData"));
   catsOwned = Number(localStorage.getItem("myNumberOfCats"));
+  buyCatCost = Number(localStorage.getItem("catCost"));
   for (let cat of cats) {
     if (cat.runAutomate === true) {
       startAutomateInterval(cat.name);
       catTree = true;
       console.log('automate is true for this cat:',cat.name);
-    } else {
-      catTree = false;
-    }
+    } 
   }
-  console.log(cats);
   game();
 }

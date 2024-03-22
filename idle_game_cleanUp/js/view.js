@@ -74,7 +74,10 @@ function checkIfBuyCat() {
 function checkIfBoughtTree(cat) {
   if (catTree) {
     let tree;
-    if (cat.upgrades === 1) {
+  } 
+  if (cat.upgrades === 0) {
+    catTreeHtml = /*HTML*/ ``; 
+  } else if (cat.upgrades === 1) {
       tree = trees.find((tree) => tree.name === "tree1");
       catTreeHtml = /*HTML*/ `
             <img class="tree" src="${tree.imgPath}">
@@ -95,7 +98,7 @@ function checkIfBoughtTree(cat) {
       `;
     }
   }
-}
+
 
 function makeTreeAndYarnButtonHtml(cat) {
   if (cat.upgrades === 1 && cat.love >= 20 && yourLove >= 20) {
