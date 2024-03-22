@@ -107,6 +107,8 @@ function loadFromLocalStorage() {
       startAutomateInterval(cat.name);
       catTree = true;
       console.log('automate is true for this cat:',cat.name);
+    } else {
+      catTree = false;
     }
   }
   console.log(cats);
