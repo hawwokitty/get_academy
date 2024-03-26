@@ -27,36 +27,38 @@ function closeApp() {
   updateView();
 }
 
-// function closeStartMenu() {
-//   startMenu = null;
-//   startButton = false;
-//   updateView();
-// }
-
-// window.addEventListener("click", function (e) {
-//   if (startButton) {
-//     // setTimeout(function () {
-//       // if (document.getElementById("startMenuId").contains(e.target)) {
-//       //   console.log("Clicked in Box");
-//       // }
-//       if (!document.getElementById("startMenuId").contains(e.target)) {
-//         console.log("Clicked ouside Box");
-//         startButton = false;
-//         updateView();
-//       }
-//     // }, 1000);
-//   }
-// });
-
 window.addEventListener("click", function (e) {
-  setTimeout(function () {
   if (startButton) {
-      if (!document.getElementById("startMenuId").contains(e.target)) {
-        console.log("Clicked ouside Box");
-        startMenu = null;
-        startButton = false;
-        updateView();
-      }
+    if (
+      e.target.parentNode.id != "startMenuId" &&
+      e.target.parentNode.id != "startMenuList" &&
+      e.target.parentNode.id != "startBtnId" &&
+      e.target.id != "startBtnId"
+    ) {
+      closeStartMenu();
+    }
   }
-}, 1000);
 });
+
+function closeStartMenu() {
+  startMenu = null;
+  startButton = false;
+  updateView();
+}
+
+let arrayOfCurrentCats = [];
+for (let i = 0; i < catsOwned; i++) {
+  for (let cat of cats) {
+    if (arrayOfCurrentCats.length >= catsOwned) {
+      break;
+    }
+    arrayOfCurrentCats.push(cat);
+  }
+}
+
+let arrayOfCurrentCats = [];
+for (let i = 0; i < catsOwned; i++) {
+  arrayOfCurrentCats.push(cats[i]);
+}
+
+arrayOfCurrentCats = cats.slice(0, catsOwned);
