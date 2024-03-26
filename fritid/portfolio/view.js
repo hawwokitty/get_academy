@@ -1,15 +1,15 @@
 updateView();
-      function updateView() {
-        let appDivs = "";
-        
-        for (let img of appIcons) {
-          appDivs += `
+function updateView() {
+  let appDivs = "";
+
+  for (let img of appIcons) {
+    appDivs += `
           <div id="${img.name}" class="app" onclick="appClicked(${img.textId})" ondblclick="appDblClick(${img.textId})">
             <img class="appImg" src="${img.imgPath}" alt="" />
             <span id="${img.textId}" class="appText">${img.name}</span>
           </div>`;
-        }
-        app.innerHTML = /*HTML*/ `
+  }
+  app.innerHTML = /*HTML*/ `
         
         <div class="desktop">
       ${appDivs}
@@ -25,21 +25,25 @@ updateView();
       </div>
     </div>
         `;
-      }
-      function makeStartButton() {
-        let windowsLogo = otherImages.find((images) => images.name === "Windows Logo");
-    
-        return `<div id="startBtnId" class="${startButton ? "startBtnActive" : "startBtn"}"
+}
+function makeStartButton() {
+  let windowsLogo = otherImages.find(
+    (images) => images.name === "Windows Logo"
+  );
+
+  return `<div id="startBtnId" class="${
+    startButton ? "startBtnActive" : "startBtn"
+  }"
               onclick="openStartMenu()">
               <img src="${windowsLogo.imgPath}" alt="" />
               Start
               </div>`;
-    }
-      
-      function openStartMenu() {
-        if (startMenu === null) {
-          startButton = true;
-        startMenu = `
+}
+
+function openStartMenu() {
+  if (startMenu === null) {
+    startButton = true;
+    startMenu = `
         <div id="startMenuId" class="startMenu">
       <div id="startSideMenu" class="sideOfMenu"></div>
       <div id="startMenuList" class="menuList">
@@ -107,28 +111,46 @@ updateView();
       </div>
     </div>
         `;
-      } else {
-        startButton = false;
-        startMenu = null;
-      }
-        updateView();
-      }
-      
-      function openGaming() {
-        openWindowTab = `
-        <div class="startTab" onclick="minimizeApp(2)">
-          <img class="windowIcon" src="images/twitchlogo.png" alt="">
-          My gaming - Twitch
-        </div>
-        `;
+  } else {
+    startButton = false;
+    startMenu = null;
+  }
+  updateView();
+}
 
-        openWindow = `<div class="window">
+function setWindowTab(appId) {
+  if (appId === 1) {
+    openWindowTab = `
+    <div class="${
+      startTab ? "startTabActive" : "startTab"
+    }" onclick="minimizeApp(1)">
+      <img class="windowIcon" src="images/Paintbrish.ico" alt="">
+      My art - Paint
+    </div>
+    `;
+  } else if (appId === 2) {
+    openWindowTab = `
+          <div class="${
+            startTab ? "startTabActive" : "startTab"
+          }" onclick="minimizeApp(2)">
+            <img class="windowIcon" src="images/twitchlogo.png" alt="">
+            My gaming - Twitch
+          </div>
+          `;
+  }
+  updateView();
+}
+
+function openGaming() {
+  startTab = true;
+  setWindowTab(2);
+  openWindow = `<div class="window">
       <div class="paint">
         <div class="windowBar">
           <img class="windowIcon" src="images/twitchlogo.png" alt="">
           <span class="windowTitle">My gaming - Twitch</span>
           <div class="minMaxClose">
-            <div class="cornerIcons">_</div>
+            <div class="cornerIcons" onclick="minimizeApp(2)">_</div>
             <div class="cornerIcons">O</div>
             <div class="cornerIcons" onclick="closeApp()">X</div>
           </div>
@@ -170,24 +192,20 @@ updateView();
       </div>
     </div>
     `;
-        updateView();
-      }
+  updateView();
+}
 
-      function openPaint() {
-        openWindowTab = `
-        <div class="startTab">
-          <img class="windowIcon" src="images/Paintbrish.ico" alt="">
-          My art - Paint
-        </div>
-        `;
-        openWindow = `
+function openPaint() {
+  startTab = true;
+  setWindowTab(1);
+  openWindow = `
         <div class="window">
     <div class="paint">
       <div class="windowBar">
         <img class="windowIcon" src="images/Paintbrish.ico" alt="">
         <span class="windowTitle">My art - Paint</span>
         <div class="minMaxClose">
-          <div class="cornerIcons">_</div>
+          <div class="cornerIcons" onclick="minimizeApp(1)">_</div>
           <div class="cornerIcons">O</div>
           <div class="cornerIcons" onclick="closeApp()">X</div>
         </div>
@@ -388,5 +406,5 @@ updateView();
     </div>
   </div>
   `;
-        updateView();
-      }
+  updateView();
+}
