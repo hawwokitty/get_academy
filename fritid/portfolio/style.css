@@ -45,7 +45,19 @@ body {
   display: flex;
   align-items: center;
   background-color: rgb(192, 192, 192);
+  box-shadow: 1px 1px black, inset -1px -1px gray, inset 1px 1px white;
+  width: 160px;
+  cursor: pointer;
+  font-size: 80%;
+}
+.startTabActive {
+  margin: 2px;
+  font-family: "W95FA", sans-serif;
+  display: flex;
+  align-items: center;
+  background-color: rgb(192, 192, 192);
   box-shadow: inset 1px 1px black, inset 2px 2px gray, 1px 1px white;
+
   width: 160px;
   cursor: pointer;
   font-size: 80%;
