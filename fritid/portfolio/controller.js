@@ -27,6 +27,18 @@ function closeApp() {
   updateView();
 }
 
+function minimizeApp(appId) {
+  if (openWindow != null) {
+    openWindow = null;
+    startTab = false;
+    setWindowTab(appId);
+  } else {
+    startTab = true;
+    openApp(appId);
+  }
+  updateView();
+}
+
 window.addEventListener("click", function (e) {
   if (startButton) {
     if (
