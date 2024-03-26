@@ -31,4 +31,5 @@ let app = document.getElementById("app");
       let openWindowTab;
       let startMenu = null;
       let startButton = false;
+      let startTab = true;
       
