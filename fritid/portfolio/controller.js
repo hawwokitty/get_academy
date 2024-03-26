@@ -46,19 +46,3 @@ function closeStartMenu() {
   updateView();
 }
 
-let arrayOfCurrentCats = [];
-for (let i = 0; i < catsOwned; i++) {
-  for (let cat of cats) {
-    if (arrayOfCurrentCats.length >= catsOwned) {
-      break;
-    }
-    arrayOfCurrentCats.push(cat);
-  }
-}
-
-let arrayOfCurrentCats = [];
-for (let i = 0; i < catsOwned; i++) {
-  arrayOfCurrentCats.push(cats[i]);
-}
-
-arrayOfCurrentCats = cats.slice(0, catsOwned);
