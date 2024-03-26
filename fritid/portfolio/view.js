@@ -27,31 +27,22 @@ updateView();
         `;
       }
       function makeStartButton() {
-        let windowsLogo = otherImages.find(
-          (images) => images.name === "Windows Logo"
-        );
-        if (startButton) {
-          return `
-          <div id="startBtnId" class="startBtnActive" onclick="openStartMenu()">
-          <img src="${windowsLogo.imgPath}" alt="" />
-          Start
-          </div>`;
-        } else {
-          return `
-          <div id="startBtnId" class="startBtn" onclick="openStartMenu()">
-          <img src="${windowsLogo.imgPath}" alt="" />
-          Start
-        </div>`;
-        }
-      }
+        let windowsLogo = otherImages.find((images) => images.name === "Windows Logo");
+    
+        return `<div id="startBtnId" class="${startButton ? "startBtnActive" : "startBtn"}"
+              onclick="openStartMenu()">
+              <img src="${windowsLogo.imgPath}" alt="" />
+              Start
+              </div>`;
+    }
       
       function openStartMenu() {
         if (startMenu === null) {
           startButton = true;
         startMenu = `
         <div id="startMenuId" class="startMenu">
-      <div class="sideOfMenu"></div>
-      <div class="menuList">
+      <div id="startSideMenu" class="sideOfMenu"></div>
+      <div id="startMenuList" class="menuList">
         <div class="menuListItem">
           <img
             src="images/Program Folder (16x16px & 32x32px).ico"
