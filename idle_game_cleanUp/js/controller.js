@@ -108,7 +108,6 @@ function loadFromLocalStorage() {
     if (cat.runAutomate === true) {
       startAutomateInterval(cat.name);
       catTree = true;
-      console.log('automate is true for this cat:',cat.name);
     } 
   }
   game();

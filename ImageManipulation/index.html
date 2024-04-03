@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Image manipulation</title>
+    <style>
+      #preview-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .preview-image {
+        margin: 10px;
+        object-fit: cover;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <script>
+      const app = document.getElementById("app");
+      let img;
+      updateView();
+      function updateView() {
+        app.innerHTML = /*HTML*/ `
+        <div>Upload an image</div>
+        <input type="file" id="imageUpload" accept="image/*" onchange="viewImage(this)">
+        <div id="preview-container">
+            <img class="preview-image" src="${img ?? ""}">
+        </div>
+        
+`;
+      }
+
+      function viewImage(imgHTML) {
+        img = URL.createObjectURL(imgHTML.files[0]);
+        updateView();
+      }
+    </script>
+  </body>
+</html>
