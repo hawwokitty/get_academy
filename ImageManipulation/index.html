@@ -5,6 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Image manipulation</title>
     <style>
+      body {
+        background-color: mintcream;
+      }
+      .main {
+        margin: auto;
+        width: 65%;
+        background-color: pink;
+        border-radius: 5px;
+        padding: 15px;
+        text-align: center;
+      }
       #preview-container {
         display: flex;
         flex-wrap: wrap;
@@ -13,6 +24,18 @@
       .preview-image {
         margin: 10px;
         object-fit: cover;
+        width: 10%;
+      }
+      .newImg {
+        display: flex;
+        justify-content: center;
+        margin: 10px;
+      }
+      .btn {
+        display: flex;
+        justify-content: center;
+        margin: 5px;
+        padding: 5px;
       }
     </style>
   </head>
@@ -22,21 +45,114 @@
     <script>
       const app = document.getElementById("app");
       let img;
+      let imgHeight;
+      let imgWidth;
+      let orgImgHeight;
+      let orgImgWidth;
+      let orgImgHeight2;
+      let orgImgWidth2;
+      let newHeight;
+      let newWidth;
+      let myImage;
+      let tempImage;
+      let aspectRatioBoo = false;
+      let downloadButton;
+      let aspectRatioW;
+      let aspectRatioH;
       updateView();
       function updateView() {
         app.innerHTML = /*HTML*/ `
-        <div>Upload an image</div>
+        <div class="main">
+        <h2>Upload an image</h2>
         <input type="file" id="imageUpload" accept="image/*" onchange="viewImage(this)">
-        <div id="preview-container">
-            <img class="preview-image" src="${img ?? ""}">
-        </div>
-        
+        <div>preview only: 
+          <div id="preview-container">
+            <img id="imgPreview" class="preview-image" src="${img ?? ""}">
+            </div>
+            This image is ${orgImgWidth} pixels wide and ${orgImgHeight} pixels tall
+            </div>
+            <div>Change image size:</div>
+            <div>Width: <input type='number' onchange="setWidth(this.value)"> px</div>
+            <div>Height: <input type='number' onchange="setHeight(this.value)"> px</div>
+            <div>Keep aspect ratio? <input type='checkbox' onchange=keepAR(this.checked)></div>
+            <button onclick='changeImage()'>Change image</button>
+            </div>
+            <div class="newImg">
+            ${myImage ?? ""}
+            </div>
+            <div class="btn">
+            This new image is ${newWidth} pixels wide and ${newHeight} pixels tall 
+            ${downloadButton ?? ""}
+            </div>
 `;
       }
 
       function viewImage(imgHTML) {
         img = URL.createObjectURL(imgHTML.files[0]);
         updateView();
+        getSize();
+      }
+
+      function getSize() {
+        let orgImage = document.getElementById("imgPreview");
+        orgImage.onload = function () {
+          orgImgHeight = this.naturalHeight;
+          orgImgWidth = this.naturalWidth;
+          aspectRatioW = orgImgWidth / orgImgHeight;
+          aspectRatioH = orgImgHeight / orgImgWidth;
+          updateView();
+        };
+      }
+
+      function setHeight(newN) {
+        newHeight = newN;
+      }
+      function setWidth(newN) {
+        newWidth = newN;
+      }
+      function keepAR(boo) {
+        aspectRatioBoo = boo;
+      }
+
+      function changeImage() {
+        if (!aspectRatioBoo) {
+          tempImage = new Image(newWidth, newHeight);
+          tempImage.src = img;
+          myImage = tempImage.outerHTML;
+        } else {
+          if (newHeight == undefined) {
+            let newHeightAR = aspectRatioH * newWidth;
+            tempImage = new Image(newWidth, newHeightAR);
+            tempImage.src = img;
+            myImage = tempImage.outerHTML;
+          } else if (newWidth == undefined) {
+            let newWidthAR = aspectRatioW * newHeight;
+            tempImage = new Image(newWidthAR, newHeight);
+            tempImage.src = img;
+            myImage = tempImage.outerHTML;
+          } else {
+            let newHeightAR = aspectRatioH * newWidth;
+            tempImage = new Image(newWidth, newHeightAR);
+            tempImage.src = img;
+            myImage = tempImage.outerHTML;
+          }
+        }
+        downloadButton = /*HTML*/ `
+        <button onclick='downloadImage()' download>Download image</button>
+        `;
+        updateView();
+      }
+
+      function downloadImage() {
+        let downloadSrc = tempImage.src;
+        console.log(downloadSrc);
+
+        // let downloadLink = document.createElement("a");
+        // downloadLink.href = tempImage.src;
+        // downloadLink.download = "image.jpg"; // Set the default download filename
+
+        // console.log(tempImage);
+        // tempImage.download = "test.png";
       }
     </script>
   </body>
