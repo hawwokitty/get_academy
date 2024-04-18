@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nettbank</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script>
+      const app = document.getElementById("app");
+
+      let model = {
+        app: {
+          loggedInUser: "Martin",
+          currentPage: "exchangeMoney",
+        },
+        input: {
+          administerAccount: {
+            bankId: null,
+            name: "",
+            money: null,
+            password: "",
+          },
+          exchangeMoney: {
+            toPersonId: null,
+            amount: null,
+          },
+          payBills: {
+            toReceiver: null,
+            amount: null,
+          },
+        },
+        data: {
+          users: [
+            {
+              bankId: 0,
+              name: "Martin",
+              money: 99999999999,
+              password: "123",
+            },
+            {
+              bankId: 1,
+              name: "Hanne",
+              money: 1,
+              password: "1234",
+            },
+          ],
+          bills: [
+            {
+              toPay: 900,
+              assignedPersonId: 0,
+              payBy: "2024-05-12",
+            },
+          ],
+        },
+      };
+
+      updateView();
+      function updateView() {
+        let currentPage = model.app.currentPage;
+        if (currentPage === "makeAccount") {
+          makeAccountView();
+        } else if (currentPage === "editAccount") {
+          editAccountView();
+        } else if (currentPage === "showAccount") {
+          showAccountView();
+        } else if (currentPage === "exchangeMoney") {
+          exchangeMoneyView();
+        } else if (currentPage === "payBills") {
+          payBillsView();
+        } else {
+          makeAccountView();
+        }
+      }
+
+      function showAccountView() {
+        let thisUser = model.data.users.find(
+          (user) => model.app.loggedInUser === user.name
+        );
+        app.innerHTML = /*HTML*/ `
+        <div>This is your account, ${model.app.loggedInUser}</div>
+        <div>You have ${thisUser.money} kr</div>
+        <button onclick='exchangeMoneyView()'>Exchange money</button>
+        <button onclick='payBillsView()'>Pay your bills</button>
+        `;
+      }
+
+      function exchangeMoneyView() {
+        app.innerHTML = /*HTML*/ `
+        <div>
+            Amount: <input type='number' onchange=setAmount(this.value)>
+            To user: <input type='text' onchange=setToUser(this.value)>
+            <button onclick='sendTheMoney()'>Send the money</button>
+            </div>
+        `;
+      }
+
+      function setAmount(amount) {
+        model.input.exchangeMoney.amount = amount;
+      }
+      function setToUser(toUser) {
+        let toPerson = model.data.users.find((user) => toUser === user.name);
+        let toPersonId = toPerson.bankId;
+        model.input.exchangeMoney.toPersonId = toPersonId;
+      }
+
+      function sendTheMoney() {
+        let toPerson = model.data.users.find((user) => model.input.exchangeMoney.toPersonId === user.bankId);
+        let fromPerson = model.data.users.find((user) => model.app.loggedInUser === user.name);
+
+        fromPerson.money -= model.input.exchangeMoney.amount;
+        toPerson.money += model.input.exchangeMoney.amount;
+      }
+    </script>
+  </body>
+</html>

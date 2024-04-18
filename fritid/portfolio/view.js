@@ -1,9 +1,8 @@
 updateView();
 function updateView() {
   let appDivs = "";
-
-  for (let img of appIcons) {
-    appDivs += `
+  for (let img of model.data.appIcons) {
+    appDivs += /*HTML*/ `
           <div id="${img.name}" class="app" onclick="appClicked(${img.textId})" ondblclick="appDblClick(${img.textId})">
             <img class="appImg" src="${img.imgPath}" alt="" />
             <span id="${img.textId}" class="appText">${img.name}</span>
@@ -13,26 +12,55 @@ function updateView() {
         
         <div class="desktop">
       ${appDivs}
-      ${openWindow ?? ""}
+      ${makeOpenWindowArrayHtml() ?? ''}
     
     </div>
-    ${startMenu ?? ""}
+    ${model.app.start.startMenu ?? ""}
     <div class="start">
       ${makeStartButton()}
-        ${openWindowTab ?? ""}
+        
+        ${makeStartAppsHtml() ?? ''}
       <div class="timeDate">
-        Last updated: 25-03-2024
+        Last updated: ${new Date()}
       </div>
     </div>
         `;
 }
+
+function makeStartAppsHtml() {
+  let html = '';
+  if (model.app.start.startTab) {
+    for (let i = 0; i < model.app.windows.appsOpen.length; i++) {
+      html += model.app.windows.appsOpen[i].htmlOpen;
+    }
+  } else {
+    for (let i = 0; i < model.windows.appsOpen.length; i++) {
+      html += model.app.windows.appsOpen[i].htmlClosed;
+    }
+  }
+  return html;
+}
+
+function makeOpenWindowArrayHtml() {
+  let html = '';
+  model.app.windows.openWindowArray.push(
+    {id: 0, html: model.app.windows.openWindow,}
+    );
+  for (let i = 0; i < model.app.windows.openWindowArray.length; i++) {
+    html += model.app.windows.openWindowArray[i];
+  }
+  // console.log(openWindowArray);
+  // console.log(openWindow);
+  return html;
+}
+
 function makeStartButton() {
-  let windowsLogo = otherImages.find(
+  let windowsLogo = model.data.otherImages.find(
     (images) => images.name === "Windows Logo"
   );
 
-  return `<div id="startBtnId" class="${
-    startButton ? "startBtnActive" : "startBtn"
+  return /*HTML*/ `<div id="startBtnId" class="${
+    model.app.start.startButton ? "startBtnActive" : "startBtn"
   }"
               onclick="openStartMenu()">
               <img src="${windowsLogo.imgPath}" alt="" />
@@ -41,9 +69,9 @@ function makeStartButton() {
 }
 
 function openStartMenu() {
-  if (startMenu === null) {
-    startButton = true;
-    startMenu = `
+  if (mode.app.start.startMenu === null) {
+    mode.app.start.startButton = true;
+    mode.app.start.startMenu = /*HTML*/ `
         <div id="startMenuId" class="startMenu">
       <div id="startSideMenu" class="sideOfMenu"></div>
       <div id="startMenuList" class="menuList">
@@ -112,47 +140,41 @@ function openStartMenu() {
     </div>
         `;
   } else {
-    startButton = false;
-    startMenu = null;
+    mode.app.start.startButton = false;
+    mode.app.start.startMenu = null;
   }
   updateView();
 }
 
 function setWindowTab(appId) {
-  if (appId === 1) {
-    openWindowTab = `
-    <div class="${
-      startTab ? "startTabActive" : "startTab"
-    }" onclick="minimizeApp(1)">
-      <img class="windowIcon" src="images/Paintbrish.ico" alt="">
-      My art - Paint
-    </div>
-    `;
-  } else if (appId === 2) {
-    openWindowTab = `
-          <div class="${
-            startTab ? "startTabActive" : "startTab"
-          }" onclick="minimizeApp(2)">
-            <img class="windowIcon" src="images/twitchlogo.png" alt="">
-            My gaming - Twitch
-          </div>
-          `;
-  }
+  mode.app.windows.openWindowTabOpen = /*HTML*/ `
+  <div class="startTabActive" onclick="minimizeApp(${appId})">
+    <img class="windowIcon" src="${model.data.appIcons[appId].startImgPath}" alt="">
+    ${model.data.appIcons[appId].startTitle}
+  </div>
+  `;
+  mode.app.windows.openWindowTabClosed = /*HTML*/ `
+  <div class="startTab" onclick="minimizeApp(${appId})">
+    <img class="windowIcon" src="${model.data.appIcons[appId].startImgPath}" alt="">
+    ${model.data.appIcons[appId].startTitle}
+  </div>
+  `;
+  openAppsOnStartBar(appId);
   updateView();
 }
 
 function openGaming() {
-  startTab = true;
-  setWindowTab(2);
-  openWindow = `<div class="window">
+  model.app.start.startTab = true;
+  setWindowTab(1);
+  model.app.windows.openWindow = /*HTML*/ `<div class="window">
       <div class="paint">
         <div class="windowBar">
           <img class="windowIcon" src="images/twitchlogo.png" alt="">
           <span class="windowTitle">My gaming - Twitch</span>
           <div class="minMaxClose">
-            <div class="cornerIcons" onclick="minimizeApp(2)">_</div>
+            <div class="cornerIcons" onclick="minimizeApp(1)">_</div>
             <div class="cornerIcons">O</div>
-            <div class="cornerIcons" onclick="closeApp()">X</div>
+            <div class="cornerIcons" onclick="closeApp(1)">X</div>
           </div>
         </div>
         <div class="mainInternet">
@@ -196,18 +218,18 @@ function openGaming() {
 }
 
 function openPaint() {
-  startTab = true;
-  setWindowTab(1);
-  openWindow = `
+  model.app.start.startTab = true;
+  setWindowTab(0);
+  model.app.windows.openWindow = /*HTML*/ `
         <div class="window">
     <div class="paint">
       <div class="windowBar">
         <img class="windowIcon" src="images/Paintbrish.ico" alt="">
         <span class="windowTitle">My art - Paint</span>
         <div class="minMaxClose">
-          <div class="cornerIcons" onclick="minimizeApp(1)">_</div>
+          <div class="cornerIcons" onclick="minimizeApp(0)">_</div>
           <div class="cornerIcons">O</div>
-          <div class="cornerIcons" onclick="closeApp()">X</div>
+          <div class="cornerIcons" onclick="closeApp(0)">X</div>
         </div>
       </div>
       <div class="grid">

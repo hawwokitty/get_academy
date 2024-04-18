@@ -137,8 +137,9 @@
             myImage = tempImage.outerHTML;
           }
         }
+        let downloadSrc = tempImage.src;
         downloadButton = /*HTML*/ `
-        <button onclick='downloadImage()' download>Download image</button>
+        <a href="${downloadSrc}" download>Download image</a>
         `;
         updateView();
       }
@@ -146,6 +147,7 @@
       function downloadImage() {
         let downloadSrc = tempImage.src;
         console.log(downloadSrc);
+        console.log(tempImage);
 
         // let downloadLink = document.createElement("a");
         // downloadLink.href = tempImage.src;

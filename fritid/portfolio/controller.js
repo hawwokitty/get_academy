@@ -13,17 +13,41 @@ function appDblClick(appId) {
   clickedApp.classList.remove("appTextClicked");
   openApp(appId);
 }
+
+function openAppsOnStartBar(appId) {
+  if (appsOpen.length === 0) {
+    appsOpen.push({
+      idR: appId,
+      htmlOpen: openWindowTabOpen,
+      htmlClosed: openWindowTabClosed,
+    });
+  }
+  let element = appsOpen.find((el) => el.idR === appId);
+  if (element === undefined) {
+    appsOpen.push({
+      idR: appId,
+      htmlOpen: openWindowTabOpen,
+      htmlClosed: openWindowTabClosed,
+    });
+  }
+  updateView();
+}
+
 function openApp(appId) {
-  if (appId === 1) {
+  if (appId === 0) {
     openPaint();
-  } else if (appId === 2) {
+  } else if (appId === 1) {
     openGaming();
   }
 }
 
-function closeApp() {
+function closeApp(appId) {
+  let element = appsOpen.find((el) => el.idR === appId);
+  let indexOfApp = appsOpen.indexOf(element);
   openWindow = null;
   openWindowTab = null;
+  appsOpen.splice(indexOfApp, 1);
+  console.log(appsOpen);
   updateView();
 }
 
@@ -57,4 +81,3 @@ function closeStartMenu() {
   startButton = false;
   updateView();
 }
-
