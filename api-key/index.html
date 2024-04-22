@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hearthstone Battlegrounds cards???</title>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="script/model.js"></script>
+    <script src="script/buildView.js"></script>
+    <script src="script/searchView.js"></script>
+    <script src="script/buildController.js"></script>
+    <script src="script/searchController.js"></script>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script>
+      const app = document.getElementById("app");
+      updateView();
+      function updateView() {
+        if (model.app.page === "searchView") {
+          searchView();
+        } else if (model.app.page === "buildView") {
+          buildView();
+        } else {
+          app.innerHTML = /*HTML*/ `
+      <button onclick='setPage("searchView")'>Find cards</button>
+      <button onclick='setPage("buildView")'>Build my deck</button>
+      `;
+        }
+      }
+
+      function setPage(page) {
+        if (page === "searchView") {
+            model.app.page = "searchView";
+        } else if (page === "buildView") {
+            model.app.page = "buildView";
+        }
+        updateView();
+      }
+
+      setAPIinModel();
+      async function setAPIinModel() {
+        try {
+          model.data.api.response = await fetch(
+            model.data.api.url,
+            model.data.api.options
+          );
+          model.data.api.result = await model.data.api.response.json();
+          model.data.api.minions = await model.data.api.result.filter(
+            (minion) => minion.type === "Minion"
+          );
+          console.log(model.data.api.minions);
+        } catch (error) {
+          console.error(error);
+        }
+      }
+    </script>
+  </body>
+</html>

@@ -7,20 +7,24 @@
     <style>
       /* CSS for star icons */
       .star-rating {
-        width: 45px;
+        width: 10px;
+        display: flex;
+        /* flex-direction: row-reverse;
+        float: right; */
       }
-
+      
       .star-rating div::before {
-        position: absolute;
+        width: 10px;
+        width: fit-content;
+        position: relative;
         content: url("img/star-empty.png");
-        transform: scale(0.2);
       }
 
-      .star-rating div:hover:before,
-      .star-rating div:hover ~ div:before {
-        position: absolute;
+      .star-rating div:hover,
+      .star-rating ~ div:hover {
+        position: relative;
         content: url("img/star-filled-in.png");
-        transform: scale(0.2);
+        
       }
     </style>
   </head>
