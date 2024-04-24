@@ -31,9 +31,9 @@
 
       function setPage(page) {
         if (page === "searchView") {
-            model.app.page = "searchView";
+          model.app.page = "searchView";
         } else if (page === "buildView") {
-            model.app.page = "buildView";
+          model.app.page = "buildView";
         }
         updateView();
       }
@@ -49,11 +49,37 @@
           model.data.api.minions = await model.data.api.result.filter(
             (minion) => minion.type === "Minion"
           );
+          await setRaceArray();
+          await setStarsArray();
           console.log(model.data.api.minions);
         } catch (error) {
           console.error(error);
         }
       }
+
+      function setRaceArray() {
+        let races = [];
+        for (let minion of model.data.api.minions) {
+          if (!races.includes(minion.race)) {
+            races.push(minion.race);
+          }
+        }
+        model.data.api.races = races;
+        updateView();
+      }
+
+      // function setStarsArray() {
+      //   let stars = [];
+      //   for (let minion of model.data.api.minions) {
+      //     if (!stars.includes(minion.cost)) {
+      //       stars.push(minion.cost);
+      //     }
+      //   }
+      //   model.data.api.stars = stars;
+      //   updateView();
+      // }
+
+     
     </script>
   </body>
 </html>

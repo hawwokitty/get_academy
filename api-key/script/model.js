@@ -1,13 +1,13 @@
 let model = {
   app: {
-    page: "",
+    page: "searchView",
   },
   input: {
     search: {
       searchText: '',
       filter: {
-        race: [],
-        cost: null,
+        race: null,
+        stars: null,
       },
       savedCards: [],
     },
@@ -27,10 +27,12 @@ let model = {
             "6471e52a57msh6041fb015dfd9f2p178d4bjsn222c4ed0f70d",
           "X-RapidAPI-Host": "omgvamp-hearthstone-v1.p.rapidapi.com",
         },
-        response: undefined,
-        result: undefined,
-        minions: undefined,
       },
+      response: undefined,
+      result: undefined,
+      minions: [],
+      races: [],
+      // stars: [],
     },
   },
 };
