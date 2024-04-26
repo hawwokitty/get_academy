@@ -4,10 +4,9 @@ let model = {
   },
   input: {
     search: {
-      searchText: '',
+      searchText: "",
       filter: {
         race: null,
-        stars: null,
       },
       savedCards: [],
     },
@@ -21,6 +20,8 @@ let model = {
     api: {
       url: "https://omgvamp-hearthstone-v1.p.rapidapi.com/cards/sets/Battlegrounds",
       options: {
+        async: true,
+        crossDomain: true,
         method: "GET",
         headers: {
           "X-RapidAPI-Key":
@@ -32,7 +33,7 @@ let model = {
       result: undefined,
       minions: [],
       races: [],
-      // stars: [],
+      minionsWithoutImg: [],
     },
   },
 };

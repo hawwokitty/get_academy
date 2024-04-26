@@ -7,6 +7,9 @@ function setSearchRace(searchRace) {
 }
 
 function searchCards() {
-    
     updateView();
 }
+
+function imageError(minionId) {
+    model.data.api.minionsWithoutImg.push(minionId);
+  }
