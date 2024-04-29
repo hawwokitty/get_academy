@@ -51,6 +51,7 @@
         model.data.api.minions = result.filter(minion => minion.type === "Minion");
         await setRaceArray();
         console.log(model.data.api.minions);
+        await getMinionCardsHtml();
       } catch (error) {
         console.error(error);
       }

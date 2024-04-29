@@ -1,6 +1,6 @@
 let model = {
   app: {
-    page: "searchView",
+    page: "buildView",
   },
   input: {
     search: {
@@ -10,12 +10,28 @@ let model = {
       },
       savedCards: [],
     },
-    build: {},
+    build: {
+      race: null,
+      boards: {
+        addToBoard: [],
+      },
+    },
   },
   data: {
-    myDeck: {
-      savedCards: [],
-      deck: [],
+    myBoards: {
+      boardsWithRace: [
+        { type: "Demon", cards: [] },
+        { type: "Mech", cards: [] },
+        { type: "Dragon", cards: [] },
+        { type: "Beast", cards: [] },
+        { type: "Elemental", cards: [] },
+        { type: "Quailboar", cards: [] },
+        { type: "Undead", cards: [] },
+        { type: "Naga", cards: [] },
+        { type: "Murloc", cards: [] },
+        { type: "Pirate", cards: [] },
+        { type: "Mixed", cards: [] },
+      ],
     },
     api: {
       url: "https://omgvamp-hearthstone-v1.p.rapidapi.com/cards/sets/Battlegrounds",

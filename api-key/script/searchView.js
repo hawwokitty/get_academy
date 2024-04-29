@@ -12,6 +12,7 @@ function searchView() {
   </select>
     </div>
     <button onclick='searchCards()'>Find cards</button>
+    <button onclick='setPage("buildView")'>Go to build</button>
     <div>${model.input.search.filter.race}:
     ${getMinionCardsHtml()}
     </div>
@@ -46,9 +47,9 @@ function getMinionCardsHtml() {
         if (!minion.hasOwnProperty("imgGold")) {
           html += /*HTML*/ `
                 <div> <h3>${minion.name}</h3>
-                <img src="${minion.img}" onerror="imageError('${minion.name}')">
-                ${getMinionInfo(minion.cardId) ?? ""}
+                <img src="${minion.img}" onerror="imgMissing(this, '${minion.cardId}');">
                 </div>
+                <button onclick='addToFav("${minion.cardId}")'>Add to favorites &#11088;</button>
                 `;
         }
       }
@@ -56,9 +57,9 @@ function getMinionCardsHtml() {
       if (!minion.hasOwnProperty("imgGold")) {
         html += /*HTML*/ `
             <div> <h3>${minion.name}</h3>
-            <img src="${minion.img}" onerror="imageError('${minion.cardId}')">
-            ${getMinionInfo(minion.cardId) ?? ""}
+            <img src="${minion.img}" onerror="imgMissing(this, '${minion.cardId}');">
             </div>
+            <button onclick='addToFav("${minion.cardId}")'>Add to favorites &#11088;</button>
             `;
       }
     }
@@ -66,15 +67,20 @@ function getMinionCardsHtml() {
   return html;
 }
 
-
+function imgMissing(image, minionId) {
+  image.onerror = "";
+  image.alt = getMinionInfo(minionId);
+  return true;
+}
 
 function getMinionInfo(minionId) {
   let html = "";
-  if (model.data.api.minionsWithoutImg.includes(minionId)) {
-    let minion = model.data.api.minions.find(
-      (minion) => minion.cardId === minionId
-    );
-    html = /*HTML*/ `
+  // if (model.data.api.minionsWithoutImg.includes(minionId)) {
+  let minion = model.data.api.minions.find(
+    (minion) => minion.cardId === minionId
+  );
+  // console.log(minion);
+  html = /*HTML*/ `
     <div>Image is unavailable for this card, so here is the
     information in text form:
     Attack: ${minion.attack}
@@ -82,7 +88,14 @@ function getMinionInfo(minionId) {
     Description: ${minion.text}
     </div>
     `;
-  }
-  
+  // }
   return html;
+}
+
+function addToFav(minionId) {
+  let minion = model.data.api.minions.find(
+    (minion) => minion.cardId === minionId
+  );
+  let savedCardsString = JSON.stringify(model.input.search.savedCards);
+  if (!savedCardsString.includes(minionId)) model.input.search.savedCards.push(minion);
 }
