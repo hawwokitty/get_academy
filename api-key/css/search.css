@@ -1,0 +1,34 @@
+.search-Container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.search-searchBar {
+    padding: 10px;
+    background-color: bisque;
+}
+
+.search-allCards {
+    display: flex;
+    flex-flow: row wrap;
+    position: relative;
+    justify-content: center;
+    margin: auto;
+}
+
+.search-cardInfo {
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    background-color: antiquewhite;
+    margin: 15px;
+    padding: 10px;
+}
+
+.search-cardInfo > img {
+    width: 280px;
+}

@@ -1,0 +1,54 @@
+.build-Container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.build-boardType {
+
+}
+
+.build-yourFavorites {
+    display: flex;
+    flex-flow: row wrap;
+    position: relative;
+    justify-content: center;
+    margin: auto;
+}
+
+.build-yourBoard {
+    display: flex;
+    justify-content: center;
+    background-color: aliceblue;
+    padding: 20px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.build-cardInfo {
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    background-color: antiquewhite;
+    margin: 15px;
+    padding: 10px;
+}
+
+.build-cardInfo > img {
+    width: 280px;
+}
+
+.build-boardCardInfo {
+    width: 220px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.build-boardCardInfo > img {
+    width: 100%;
+}

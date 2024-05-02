@@ -1,21 +1,26 @@
 function searchView() {
   app.innerHTML = /*HTML*/ `
-    <div>Search: 
+  <div class="search-Container">
+    <div class="search-searchBar">Search: 
     <input type='text' onchange="setSearchText(this.value)" value="${
       model.input.search.searchText
     }" placeholder="enter card youre looking for here">
-    <label for="race">Choose a race:</label>
+    <label class="search-pickRace" for="race">Choose a race:</label>
   <select name="race" id="race" onchange="setSearchRace(this.value)" value="${
     model.input.search.filter.race
   }">
     ${getMinionRaceHtml()}
   </select>
-    </div>
+    </div> <!-- end of search bar -->
+    <div class="search-buttons">
     <button onclick='searchCards()'>Find cards</button>
     <button onclick='setPage("buildView")'>Go to build</button>
-    <div>${model.input.search.filter.race}:
-    ${getMinionCardsHtml()}
     </div>
+    <h2>${model.input.search.filter.race ?? "All cards"}:</h2>
+    <div class="search-allCards">
+    ${getMinionCardsHtml()}
+    </div> <!-- end of all cards -->
+    </div> <!-- end of container -->
     `;
 }
 
@@ -46,20 +51,22 @@ function getMinionCardsHtml() {
       ) {
         if (!minion.hasOwnProperty("imgGold")) {
           html += /*HTML*/ `
-                <div> <h3>${minion.name}</h3>
+                <div class="search-cardInfo"> 
+                <h3>${minion.name}</h3>
                 <img src="${minion.img}" onerror="imgMissing(this, '${minion.cardId}');">
-                </div>
                 <button onclick='addToFav("${minion.cardId}")'>Add to favorites &#11088;</button>
+                </div> <!-- end of card info -->
                 `;
         }
       }
     } else {
       if (!minion.hasOwnProperty("imgGold")) {
         html += /*HTML*/ `
-            <div> <h3>${minion.name}</h3>
-            <img src="${minion.img}" onerror="imgMissing(this, '${minion.cardId}');">
-            </div>
-            <button onclick='addToFav("${minion.cardId}")'>Add to favorites &#11088;</button>
+        <div class="search-cardInfo"> 
+        <h3>${minion.name}</h3>
+        <img src="${minion.img}" onerror="imgMissing(this, '${minion.cardId}');">
+        <button onclick='addToFav("${minion.cardId}")'>Add to favorites &#11088;</button>
+        </div> <!-- end of card info -->
             `;
       }
     }
@@ -68,9 +75,9 @@ function getMinionCardsHtml() {
 }
 
 function imgMissing(image, minionId) {
-  image.onerror = "";
-  image.alt = getMinionInfo(minionId);
-  return true;
+  let replacementDiv = document.createElement("div");
+  replacementDiv.innerHTML = getMinionInfo(minionId);
+  image.replaceWith(replacementDiv);
 }
 
 function getMinionInfo(minionId) {
@@ -83,9 +90,10 @@ function getMinionInfo(minionId) {
   html = /*HTML*/ `
     <div>Image is unavailable for this card, so here is the
     information in text form:
-    Attack: ${minion.attack}
-    Health: ${minion.health}
-    Description: ${minion.text}
+    <p>Race: ${minion.race}</p>
+    <p>Attack: ${minion.attack}</p>
+    <p>Health: ${minion.health}</p>
+    <p>Description: ${minion.text}</p>
     </div>
     `;
   // }
@@ -97,5 +105,6 @@ function addToFav(minionId) {
     (minion) => minion.cardId === minionId
   );
   let savedCardsString = JSON.stringify(model.input.search.savedCards);
-  if (!savedCardsString.includes(minionId)) model.input.search.savedCards.push(minion);
+  if (!savedCardsString.includes(minionId))
+    model.input.search.savedCards.push(minion);
 }
