@@ -40,14 +40,14 @@ function getMinionCardsHtml() {
   let html = "";
   for (let minion of model.data.api.minions) {
     if (
-      model.input.search.filter.race != null ||
+      model.input.search.filter.race != "Every" ||
       model.input.search.searchText != ""
     ) {
       let minionString = JSON.stringify(minion);
       if (
         minionString.includes(model.input.search.searchText) &&
         (minion.race === model.input.search.filter.race ||
-          model.input.search.filter.race === null)
+          model.input.search.filter.race === "Every")
       ) {
         if (!minion.hasOwnProperty("imgGold")) {
           html += /*HTML*/ `

@@ -1,12 +1,12 @@
 let model = {
   app: {
-    page: "buildView",
+    page: "",
   },
   input: {
     search: {
       searchText: "",
       filter: {
-        race: null,
+        race: "Every",
       },
       savedCards: [],
     },

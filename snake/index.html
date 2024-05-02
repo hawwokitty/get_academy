@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Snake</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="script/model.js"></script>
+    <script src="script/gameView.js"></script>
+    <script src="script/gameController.js"></script>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script>
+      const app = document.getElementById("app");
+      updateView();
+      function updateView() {
+        gameView();
+      }
+    </script>
+  </body>
+</html>
