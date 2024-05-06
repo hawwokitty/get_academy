@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="script/main/model.js"></script>
+    <script src="script/adjektivfortelling/adjektivfortellingView.js"></script>
+    <script src="script/croc/crocView.js"></script>
+    <script src="script/email/emailView.js"></script>
+    <script src="script/magic8ball/magic8ballView.js"></script>
+    <script src="script/main/commonView.js"></script>
+    <script src="script/mario/marioView.js"></script>
+    <script src="script/nonogram/nonogramView.js"></script>
+    <script src="script/reactionTime/reactionTimeView.js"></script>
+    <script src="script/RPS/RPSView.js"></script>
+    <script src="script/simonSays/simonSaysView.js"></script>
+    <script src="script/tamagotchi/tamagotchiView.js"></script>
+    <script src="script/tampenBrenner/tampenBrennerView.js"></script>
+    <script src="script/ticTacToe/TTTView.js"></script>
+
+    <script src="script/adjektivfortelling/adjektivfortellingController.js"></script>
+    <script src="script/croc/crocController.js"></script>
+    <script src="script/email/emailController.js"></script>
+    <script src="script/magic8ball/magic8ballController.js"></script>
+    <script src="script/main/commonController.js"></script>
+    <script src="script/mario/marioController.js"></script>
+    <script src="script/nonogram/nonogramController.js"></script>
+    <script src="script/reactionTime/reactionTimeController.js"></script>
+    <script src="script/RPS/RPSController.js"></script>
+    <script src="script/simonSays/simonSaysController.js"></script>
+    <script src="script/tamagotchi/tamagotchiController.js"></script>
+    <script src="script/tampenBrenner/tampenBrennerController.js"></script>
+    <script src="script/ticTacToe/TTTController.js"></script>
+    <title>Mixed game</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script>
+      const app = document.getElementById("app");
+      updateView();
+      function updateView() {
+        if (model.app.main.page === 0) {
+          commonView();
+        }
+        if (model.app.main.page === 1) {
+          adjektivfortellingView();
+        }
+      }
+    </script>
+  </body>
+</html>
