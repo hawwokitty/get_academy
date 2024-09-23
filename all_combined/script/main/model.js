@@ -1,7 +1,7 @@
 const model = {
   app: {
     main: {
-      page: 0,
+      page: 5,
       user: null,
       timer: null,
     },
@@ -11,9 +11,14 @@ const model = {
   },
   input: {
     adj: {
-      word1: undefined,
-      word2: undefined,
-      word3: undefined,
+      adjective1: undefined,
+      adjective2: undefined,
+      verb1: undefined,
+      verb2: undefined,
+      noun: undefined,
+      YesOrNo: undefined,
+      name: undefined,
+      showReply: false,
     },
     croc: {
       answer: undefined,
@@ -51,14 +56,15 @@ const model = {
       story: "",
     },
     croc: {
-      score: null,
+      score: 0,
       maxNum: 10,
-      randomNumber1: null,
-      randomNumber2: null,
+      turns: 20,
+      currentTurn: 1,
     },
     email: {
       emailPattern: /^.+@.+\..+$/,
       userEmail: undefined,
+      reponse: undefined,
     },
     magic: {
       responses: [
@@ -79,6 +85,7 @@ const model = {
         "Signs point to yes",
       ],
       userQuestion: undefined,
+      response: undefined,
     },
     mario: {
       playableCharacters: [
@@ -106,47 +113,50 @@ const model = {
       playerHp: undefined,
     },
     nono: {
+      lives: 3,
+      result: undefined,
+      randomNonogram: undefined,
       nonogram3x3: [
         {
-          cellArray: [5, 6, 9, 10, 11, 14],
+          cells: [5, 6, 9, 10, 11, 14],
           rows: ["2", "3", "1"],
-          columns: ["2", "3", "1"],
+          cols: ["2", "3", "1"],
         },
         {
-          cellArray: [6, 7, 9, 10, 13, 15],
+          cells: [6, 7, 9, 10, 13, 15],
           rows: ["2", "2", "1, 1"],
-          columns: ["2", "2", "1, 1"],
+          cols: ["2", "2", "1, 1"],
         },
         {
-          cellArray: [5, 7, 10, 13, 15],
+          cells: [5, 7, 10, 13, 15],
           rows: ["1, 1", "1", "1, 1"],
-          columns: ["1, 1", "1", "1, 1"],
+          cols: ["1, 1", "1", "1, 1"],
         },
       ],
       nonogram5x5: [
         {
-          cellArray: [
+          cells: [
             7, 11, 13, 14, 15, 16, 17, 20, 21, 22, 25, 26, 27, 28, 29, 32, 34,
           ],
           rows: ["1, 1", "5", "3", "5", "1, 1"],
-          columns: ["2, 1", "4", "3", "4", "2, 1"],
+          cols: ["2, 1", "4", "3", "4", "2, 1"],
         },
         {
-          cellArray: [8, 10, 14, 16, 25, 29, 32, 33, 34],
+          cells: [8, 10, 14, 16, 25, 29, 32, 33, 34],
           rows: ["1, 1", "1, 1", "0", "1, 1", "3"],
-          columns: ["1", "2, 1", "1", "2, 1", "1"],
+          cols: ["1", "2, 1", "1", "2, 1", "1"],
         },
         {
-          cellArray: [
+          cells: [
             7, 11, 13, 14, 15, 16, 17, 19, 21, 23, 25, 26, 28, 29, 32, 33, 34,
           ],
           rows: ["1, 1", "5", "1, 1, 1", "2, 2", "3"],
-          columns: ["4", "1, 2", "2, 1", "1, 2", "4"],
+          cols: ["4", "1, 2", "2, 1", "1, 2", "4"],
         },
         {
-          cellArray: [7, 11, 13, 15, 17, 20, 22, 26, 28, 31, 32, 34, 35],
+          cells: [7, 11, 13, 15, 17, 20, 22, 26, 28, 31, 32, 34, 35],
           rows: ["1, 1", "1, 1, 1", "1, 1", "1, 1", "2, 2"],
-          columns: ["2, 1", "3", "1", "3", "2, 1"],
+          cols: ["2, 1", "3", "1", "3", "2, 1"],
         },
       ],
     },

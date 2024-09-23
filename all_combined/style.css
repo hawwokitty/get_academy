@@ -1,0 +1,89 @@
+body {
+  background-color: #f8c5d5;
+}
+
+.welcomeContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10%;
+}
+
+.commonContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2.5%;
+}
+
+.commonTimer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 10px;
+}
+
+.commonGame {
+  width: 50%;
+  height: 70vh;
+  background-color: aliceblue;
+  border-radius: 20px;
+  border: 2px solid rgb(111, 26, 52);
+  margin: 10px;
+}
+
+.commonSwitchButton {
+  background-color: rgb(111, 26, 52);
+  border: 2px solid rgb(61, 0, 18);
+  color: white;
+  padding: 10px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  border-radius: 20px;
+}
+
+.commonHintButton {
+  background-color: rgb(177, 50, 89);
+  border: 2px solid rgb(61, 0, 18);
+  color: white;
+  padding: 10px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  border-radius: 20px;
+}
+
+.commonPageNum {
+    text-align: center;
+    margin: 10px;
+}
+
+
+/* nonogram below  */
+.nono-cell {
+  width: 50px;
+  height: 50px;
+  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+}
+.nono-grid {
+  display: grid;
+  margin: 10px 0;
+}
+.nono-grid-3x3 {
+  grid-template-columns: repeat(4, 50px);
+  grid-template-rows: repeat(4, 50px);
+}
+.nono-filled {
+  background-color: rgb(184, 35, 119);
+}
+.nono-info {
+  font-size: 20px;
+  margin: 10px 0;
+}
